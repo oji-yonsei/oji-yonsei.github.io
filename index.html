@@ -823,7 +823,7 @@ let li=0;const ji=$("#ji");
 ji.addEventListener("click",()=>{li=(li+1)%LINES.length;$("#bubble").textContent=LINES[li];ji.classList.remove("hop");void ji.offsetWidth;ji.classList.add("hop")});
 /* archive: Apps Script(대표 드라이브) 목록 + archive.json 목록 */
 (function(){
-  const UPLOAD_API="UPLOAD_API_URL"; // Apps Script 웹 앱 주소
+  const UPLOAD_API="https://script.google.com/macros/s/AKfycbx-u7vGIKTJUMRcHvENAbktUbanSkLpW_zjfiCqEt2cRt7bU-hFcTBW8t0E1rPFAzDEdw/exec"; // Apps Script 웹 앱 주소
   const API_READY=/^https:\/\/script\.google\.com\//.test(UPLOAD_API);
   let filter="all",kindF="all",apiRows=[],jsonRows=[];
   const kinds={"활동 보고서":"rep","카드뉴스":"card"};
