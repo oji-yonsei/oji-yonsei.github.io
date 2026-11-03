@@ -527,6 +527,37 @@ div.card{display:block}
 .roles3 p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
 .closing{margin:22px 0 0;padding:18px 22px;background:var(--hero-bg);color:var(--hero-title);border-radius:12px;font-size:15.5px;font-weight:500;line-height:1.75}
 @media (max-width:860px){.why-grid,.roles3{grid-template-columns:1fr}.roles3>div{border-right:0;border-bottom:1px solid var(--line)}.roles3>div:last-child{border-bottom:0}}
+/* activity detail */
+.act4{cursor:pointer;transition:border-color .2s,transform .2s}
+.act4:hover{border-color:var(--accent);transform:translateY(-3px)}
+.act4 .go{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:none}
+.ad-sec{margin-bottom:44px}
+.ad-sec>h3{font-size:20px;margin-bottom:14px}
+.ad-list{display:grid;gap:12px}
+.ad-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.ad-item .when{font-size:12.5px;color:var(--scarf);font-weight:500}
+.ad-item .sem{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:6px}
+.ad-item h4{margin:4px 0;font-size:16px}
+.ad-item p{margin:0;font-size:14px;color:var(--muted)}
+.ad-item .lines{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:5px}
+.ad-item .lines li{font-size:13.5px;color:var(--muted)}
+.ad-item .lines b{color:var(--ink);margin-right:6px}
+.ad-item .lines a.src{margin-left:4px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;padding:1px 8px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:99px;white-space:nowrap}
+.ad-item .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ad-empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:26px;text-align:center;color:var(--muted);font-size:14px}
+.ad-book{display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.ad-book .mini{width:92px;aspect-ratio:3/4;border-radius:4px 10px 10px 4px;background:var(--band);color:var(--on-band);box-shadow:inset 6px 0 0 var(--band-2);display:flex;align-items:flex-end;padding:10px;font-size:12px;font-weight:700;line-height:1.35}
+.ad-book .info{flex:1;min-width:220px}
+.ad-book .info strong{font-size:17px;display:block}
+.ad-book .info span{font-size:13.5px;color:var(--muted)}
+.ad-book a{font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}
+.recs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rec .cover{aspect-ratio:3/4;border-radius:4px 12px 12px 4px;background:repeating-linear-gradient(135deg,var(--khaki-soft),var(--khaki-soft) 12px,var(--surface) 12px,var(--surface) 24px);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;text-align:center;padding:12px}
+.rec .cover.filled{background:var(--band);color:var(--on-band);border:0;box-shadow:inset 7px 0 0 var(--band-2);align-items:flex-end;justify-content:flex-start;text-align:left;font-weight:700;font-size:15px}
+.rec strong{display:block;margin-top:10px;font-size:15px}
+.rec span{display:block;font-size:13px;color:var(--muted)}
+.ad-notices .notices{max-width:none}
+@media (max-width:860px){.recs{grid-template-columns:1fr 1fr}}
 /* members */
 .members{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .member{perspective:900px;height:200px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
@@ -635,7 +666,7 @@ footer strong{color:var(--ink);font-size:16px}
 </div></section>
 <section class="sec home-sec"><div class="wrap">
   <div class="h-head"><div class="eyebrow">What we do</div><h2>미지의 세계를 탐구하고, 지식을 나누며, 함께 성장합니다</h2></div>
-  <div class="wwd"><a class="wwd-tile t-seminar" href="#activities" data-act="seminar"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></span><strong>SEMINAR</strong><span>학술 세미나 및 토론</span></a><a class="wwd-tile t-research" href="#activities" data-act="reading"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></span><strong>RESEARCH</strong><span>개발협력 분야 탐구</span></a><a class="wwd-tile t-project" href="#activities" data-act="project"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></span><strong>PROJECT</strong><span>프로젝트 및 실천 활동</span></a><a class="wwd-tile t-sharing" href="#activities" data-act="sharing"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></span><strong>SHARING</strong><span>지식 및 활동 공유</span></a></div>
+  <div class="wwd"><a class="wwd-tile t-seminar" href="#seminar"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></span><strong>SEMINAR</strong><span>학술 세미나 및 토론</span></a><a class="wwd-tile t-research" href="#reading"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></span><strong>RESEARCH</strong><span>개발협력 분야 탐구</span></a><a class="wwd-tile t-project" href="#project"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></span><strong>PROJECT</strong><span>프로젝트 및 실천 활동</span></a><a class="wwd-tile t-sharing" href="#discussion"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></span><strong>SHARING</strong><span>지식 및 활동 공유</span></a></div>
 </div></section>
 <section class="sec alt home-sec"><div class="wrap">
 <div class="home-split">
@@ -766,14 +797,14 @@ footer strong{color:var(--ink);font-size:16px}
   <div class="sec-head"><div><div class="eyebrow">Activities</div><div class="crumb"><a href="#home">홈</a> › <span class="crumb-here"></span></div></div><div><h2>무엇을 하는지 보여드릴게요</h2><p>세미나, 독서, 토론, 프로젝트와 대외활동까지. 오지 탐험대가 함께해 온 활동 기록입니다.</p></div></div>
 
   <div class="acts4" id="acts4">
-    <article class="act4" id="act-seminar"><div class="art t-seminar"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></div><div class="eyebrow">Seminar</div><h3>세미나</h3><p>주제별 발제와 경험 공유로 개발협력을 깊이 있게 배웁니다.</p><ul><li>해외봉사 사례 경험 공유</li><li>10주 포트폴리오 과정 (2026 2학기)</li><li>주제별 발제와 질의응답</li></ul></article>
-    <article class="act4" id="act-reading"><div class="art t-research"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></div><div class="eyebrow">Reading</div><h3>독서</h3><p>한 권의 책을 주차별로 나눠 읽고, 영상과 기사를 함께 봅니다.</p><ul><li>『왜 세계의 절반은 굶주리는가?』 (2026 2학기)</li><li>주차별로 목차를 나눠 읽기</li></ul></article>
-    <article class="act4" id="act-sharing"><div class="art t-sharing"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></div><div class="eyebrow">Discussion</div><h3>토론</h3><p>사업 사례와 뉴스를 두고 서로 다른 관점을 나눕니다.</p><ul><li>개발협력 사업 사례 분석과 토의</li><li>적정기술과 현지 맞춤형 솔루션 토의</li><li>뉴스 속 개발협력 이야기</li></ul></article>
-    <article class="act4" id="act-project"><div class="art t-project"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></div><div class="eyebrow">Project</div><h3>프로젝트 · 대외활동</h3><p>배운 것을 직접 설계하고, 밖으로 나가 더 넓은 현장을 만납니다.</p><ul><li>공모전 참가 (준비 중)</li><li>자체 사업계획서 작성 (준비 중)</li><li>개발협력 행사·설명회 참석</li></ul></article>
+    <article class="act4" id="act-seminar" data-go="seminar"><div class="art t-seminar"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></div><div class="eyebrow">Seminar</div><h3>세미나</h3><p>주제별 발제와 경험 공유로 개발협력을 깊이 있게 배웁니다.</p><ul><li>해외봉사 사례 경험 공유</li><li>10주 포트폴리오 과정 (2026 2학기)</li><li>주제별 발제와 질의응답</li></ul><a class="go" href="#seminar">자세히 보기 →</a></article>
+    <article class="act4" id="act-reading" data-go="reading"><div class="art t-research"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></div><div class="eyebrow">Reading</div><h3>독서</h3><p>한 권의 책을 주차별로 나눠 읽고, 주제를 찾아 함께 대화를 나눕니다.</p><ul><li>『왜 세계의 절반은 굶주리는가?』 (2026 2학기)</li><li>주차별로 목차를 나눠 읽기</li></ul><a class="go" href="#reading">자세히 보기 →</a></article>
+    <article class="act4" id="act-sharing" data-go="discussion"><div class="art t-sharing"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></div><div class="eyebrow">Discussion</div><h3>토론</h3><p>사업 사례와 뉴스를 두고 서로 다른 관점을 나눕니다.</p><ul><li>개발협력 사업 사례 분석과 토의</li><li>적정기술과 현지 맞춤형 솔루션 토의</li><li>뉴스 속 개발협력 이야기</li></ul><a class="go" href="#discussion">자세히 보기 →</a></article>
+    <article class="act4" id="act-project" data-go="project"><div class="art t-project"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></div><div class="eyebrow">Project</div><h3>프로젝트 · 대외활동</h3><p>배운 것을 직접 설계하고, 밖으로 나가 더 넓은 현장을 만납니다.</p><ul><li>공모전 참가 (준비 중)</li><li>자체 사업계획서 작성 (준비 중)</li><li>개발협력 행사·설명회 참석</li></ul><a class="go" href="#project">자세히 보기 →</a></article>
   </div>
 
   <div class="block" id="act-book">
-    <div class="b-head"><div class="eyebrow">Reading</div><h3>함께 읽는 책</h3><p class="b-sub">한 권의 책을 주차별로 나눠 읽고 함께 이야기를 나눕니다.</p></div>
+    <div class="b-head"><div class="eyebrow">Reading</div><h3>함께 읽는 책</h3><p class="b-sub">한 권의 책을 주차별로 나눠 읽고, 주제를 찾아 함께 대화를 나눕니다.</p></div>
   <div class="reading">
     <div class="book-stage">
       <div class="book" id="bookCover" aria-live="polite"></div>
@@ -818,6 +849,30 @@ footer strong{color:var(--ink);font-size:16px}
   </form>
   <div class="board" id="nbList"><p class="arch-empty">공지사항을 불러오는 중입니다.</p></div>
   <div class="nb-pages" id="nbPages"></div>
+</div></section>
+
+<section class="sec view" id="v-seminar" data-route="seminar" hidden><div class="wrap">
+  <div class="sec-head"><div><div class="eyebrow">Seminar</div><div class="crumb"><a href="#home">홈</a> › <a href="#activities">활동</a> › 세미나</div></div><div><h2>세미나</h2><p>주제별 발제와 경험 공유로 개발협력을 깊이 있게 배웁니다.</p></div></div>
+  <div class="ad-body" id="ad-seminar"></div>
+  <div class="wrap" style="padding:0"><nav class="pager" aria-label="페이지 이동"><a href="#activities"><small>← 돌아가기</small><strong>활동 전체 보기</strong></a></nav></div>
+</div></section>
+
+<section class="sec view" id="v-reading" data-route="reading" hidden><div class="wrap">
+  <div class="sec-head"><div><div class="eyebrow">Reading</div><div class="crumb"><a href="#home">홈</a> › <a href="#activities">활동</a> › 독서</div></div><div><h2>독서</h2><p>한 권의 책을 주차별로 나눠 읽고, 주제를 찾아 함께 대화를 나눕니다.</p></div></div>
+  <div class="ad-body" id="ad-reading"></div>
+  <div class="wrap" style="padding:0"><nav class="pager" aria-label="페이지 이동"><a href="#activities"><small>← 돌아가기</small><strong>활동 전체 보기</strong></a></nav></div>
+</div></section>
+
+<section class="sec view" id="v-discussion" data-route="discussion" hidden><div class="wrap">
+  <div class="sec-head"><div><div class="eyebrow">Discussion</div><div class="crumb"><a href="#home">홈</a> › <a href="#activities">활동</a> › 토론</div></div><div><h2>토론</h2><p>사업 사례와 뉴스를 두고 서로 다른 관점을 나눕니다.</p></div></div>
+  <div class="ad-body" id="ad-discussion"></div>
+  <div class="wrap" style="padding:0"><nav class="pager" aria-label="페이지 이동"><a href="#activities"><small>← 돌아가기</small><strong>활동 전체 보기</strong></a></nav></div>
+</div></section>
+
+<section class="sec view" id="v-project" data-route="project" hidden><div class="wrap">
+  <div class="sec-head"><div><div class="eyebrow">Project</div><div class="crumb"><a href="#home">홈</a> › <a href="#activities">활동</a> › 프로젝트 · 대외활동</div></div><div><h2>프로젝트 · 대외활동</h2><p>배운 것을 직접 설계하고, 밖으로 나가 더 넓은 현장을 만납니다.</p></div></div>
+  <div class="ad-body" id="ad-project"></div>
+  <div class="wrap" style="padding:0"><nav class="pager" aria-label="페이지 이동"><a href="#activities"><small>← 돌아가기</small><strong>활동 전체 보기</strong></a></nav></div>
 </div></section>
 
 <section class="sec view" id="v-archive" data-route="archive" hidden><div class="wrap">
@@ -905,7 +960,8 @@ const BOOK=[
 ];
 const $=s=>document.querySelector(s);
 const PAGES=[["about","모임 소개"],["activities","활동"],["notice","공지사항"],["archive","자료실"],["join","합류하기"]];
-const ROUTES=["home",...PAGES.map(p=>p[0])];
+const SUBS={seminar:"세미나",reading:"독서",discussion:"토론",project:"프로젝트 · 대외활동"};
+const ROUTES=["home",...PAGES.map(p=>p[0]),...Object.keys(SUBS)];
 function esc0(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 PAGES.forEach(([r,t],i)=>{
   const v=document.querySelector(`[data-route="${r}"]`);
@@ -918,8 +974,10 @@ PAGES.forEach(([r,t],i)=>{
 function route(){
   const h=location.hash.slice(1);const r=ROUTES.includes(h)?h:"home";
   document.querySelectorAll(".view").forEach(v=>v.hidden=v.dataset.route!==r);
-  document.querySelectorAll("nav.menu a").forEach(a=>a.getAttribute("href")==="#"+r?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
-  document.title=r==="home"?"오지 탐험대":PAGES.find(p=>p[0]===r)[1]+" · 오지 탐험대";
+  const navR=SUBS[r]?"activities":r;
+  document.querySelectorAll("nav.menu a").forEach(a=>a.getAttribute("href")==="#"+navR?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current"));
+  document.title=r==="home"?"오지 탐험대":(SUBS[r]||PAGES.find(p=>p[0]===r)[1])+" · 오지 탐험대";
+  if(SUBS[r]&&window.renderActDetail)renderActDetail(r);
   if(window.__sub){const el=document.getElementById(window.__sub);window.__sub=null;requestAnimationFrame(()=>el&&el.scrollIntoView({block:"start"}))}else scrollTo(0,0);
   if(r==="notice"&&window.ojiNotices)ojiNotices.show();
   if(r==="activities"&&window.buildTrail)requestAnimationFrame(()=>window.buildTrail());
@@ -1081,7 +1139,8 @@ window.ojiNotices=(function(){
   }
   document.addEventListener("click",e=>{const a=e.target.closest("[data-notice]");if(a){pending=a.dataset.notice}});
   return{
-    set(n){list=Array.isArray(n)?n:null;render();home()},
+    set(n){list=Array.isArray(n)?n:null;render();home();const h=location.hash.slice(1);if(window.renderActDetail&&["seminar","reading","discussion","project"].includes(h))renderActDetail(h)},
+    items(){return sorted()},
     home,
     show(){if(pending){openId=pending;pending=null;cat="all";const i=sorted().findIndex(x=>x.id===openId);page=i>=0?Math.floor(i/PER)+1:1;render();requestAnimationFrame(()=>{const r=document.querySelector(`.nrow[data-id="${CSS.escape(openId)}"]`);r&&r.scrollIntoView({block:"center"})})}}
   };
@@ -1343,6 +1402,36 @@ $("#bkDots").addEventListener("click",e=>{const d=e.target.closest("button");if(
 fillBook();
 
 
+/* activity detail pages: 탐험 기록에서 종류별로 모아 보여줍니다 */
+const RECS=[ // 추천도서: {title,author,topic,by(선택)}
+];
+const ACT_TYPES={
+  seminar:{name:"세미나",cats:["활동"],match:s=>["발제","공유","OT","시작"].includes(s.kl)},
+  reading:{name:"독서",cats:["독서"],match:s=>s.kl==="독서"||(s.tags||[]).includes("독서")},
+  discussion:{name:"토론",cats:["활동"],match:s=>s.kl==="토의"||["토의","사례 분석","시사"].some(t=>(s.tags||[]).includes(t))},
+  project:{name:"프로젝트 · 대외활동",cats:["행사"],match:s=>["과제","마무리"].includes(s.kl)||(s.tags||[]).includes("교류회")}
+};
+function adItem(s,sem){
+  const lines=s.lines?`<ul class="lines">${s.lines.map(([n,t,u,ty])=>`<li><b>${esc(n)}</b>${esc(t)}${u&&/^https:\/\//.test(u)?` <a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(ty||"자료")} 보기 ↗</a>`:""}</li>`).join("")}</ul>`:"";
+  return `<div class="ad-item"><div class="when mono">${esc([s.when,...(s.who||[])].join(" · "))}<span class="sem">${esc(sem)}</span></div><h4>${esc(s.title)}</h4>${s.desc?`<p>${esc(s.desc)}</p>`:""}${lines}${(s.tags||[]).length?`<div class="tg">${s.tags.map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>`:""}</div>`;
+}
+window.renderActDetail=function(type){
+  const T=ACT_TYPES[type],box=document.getElementById("ad-"+type);if(!T||!box)return;
+  const recs=[];SEMS.forEach(sem=>sem.stops.forEach(s=>{if(!s.future&&T.match(s))recs.push(adItem(s,sem.label))}));
+  let html="";
+  if(type==="reading"){
+    const cur=BOOKS.filter(b=>b.title);
+    html+=`<div class="ad-sec"><h3>함께 읽는 책</h3>${cur.length?cur.map(b=>`<div class="ad-book"><div class="mini">${esc(b.title)}</div><div class="info"><strong>${esc(b.title)}</strong><span>${esc(b.by)}</span></div><a href="#activities" data-act="book">주차별 읽기 보기 →</a></div>`).join(""):`<div class="ad-empty">함께 읽을 책을 고르고 있어요.</div>`}</div>`;
+    const slots=Math.max(4,RECS.length);
+    html+=`<div class="ad-sec"><h3>추천도서</h3><div class="recs">${Array.from({length:slots},(_,i)=>{const r=RECS[i];return r?`<div class="rec"><div class="cover filled">${esc(r.title)}</div><strong>${esc(r.title)}</strong><span>${esc(r.author)}</span><span>${esc(r.topic||"")}</span></div>`:`<div class="rec"><div class="cover">추천도서를<br>준비하고 있어요</div></div>`}).join("")}</div></div>`;
+  }
+  html+=`<div class="ad-sec"><h3>${type==="reading"?"독서 활동 기록":"활동 기록"}</h3>${recs.length?`<div class="ad-list">${recs.reverse().join("")}</div>`:`<div class="ad-empty">${type==="project"?"공모전 참가와 자체 사업계획서를 준비하고 있어요. 활동이 생기면 이곳에 기록됩니다.":"아직 기록된 활동이 없어요."}</div>`}</div>`;
+  const ns=(window.ojiNotices&&ojiNotices.items?ojiNotices.items():[]).filter(n=>T.cats.includes(n.category)).slice(0,5);
+  if(ns.length)html+=`<div class="ad-sec ad-notices"><h3>관련 공지</h3><ul class="notices">${ns.map(n=>`<li><span class="tag">${esc(n.category)}</span><a href="#notice" data-notice="${esc(n.id)}">${esc(n.title)}</a><span class="d mono">${esc(n.date)}</span></li>`).join("")}</ul></div>`;
+  box.innerHTML=html;
+};
+document.querySelectorAll(".act4[data-go]").forEach(c=>c.addEventListener("click",e=>{if(e.target.closest("a"))return;location.hash=c.dataset.go}));
+{const h=location.hash.slice(1);if(ACT_TYPES[h])renderActDetail(h);}
 </script>
 
 </body>
