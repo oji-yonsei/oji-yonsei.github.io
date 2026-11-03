@@ -333,7 +333,10 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .news-card .when{font-size:12px;color:var(--scarf)}
 .news-card strong{font-size:16px}
 .news-card span:last-child{font-size:13.5px;color:var(--muted)}
-.notices-all{max-width:880px}
+.notices-all{max-width:none}
+.home-split{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr);gap:40px;align-items:start}
+.hs-notice{min-width:0}
+@media (max-width:960px){.home-split{grid-template-columns:1fr}}
 .notices{list-style:none;margin:0;padding:0;border-top:2px solid var(--accent)}
 .notices li{display:flex;gap:12px;align-items:baseline;padding:13px 2px;border-bottom:1px solid var(--line);font-size:14.5px;min-width:0}
 .notices .tag{flex:none;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;background:var(--khaki-soft);color:var(--ink)}
@@ -429,6 +432,51 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .nb-pages button{font:inherit;font-size:13.5px;min-width:34px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .nb-pages button[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
 @media (max-width:640px){.nrow{grid-template-columns:auto 1fr;gap:6px 10px}.nrow .no{display:none}.nrow .d{grid-column:2}.nrow .nt{grid-column:1/-1;order:-1}.ndetail{padding:16px}.nb-grid{grid-template-columns:1fr}}
+/* calendar */
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;min-width:0}
+.cal-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:14px}
+.cal-head .btn{padding:8px 14px;font-size:13.5px;background:var(--accent);color:var(--surface)}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-nav strong{font-size:16px}
+.cal-nav button{font:inherit;font-size:20px;line-height:1;width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-grid .wd{font-size:11.5px;color:var(--muted);text-align:center;padding:4px 0;font-weight:600}
+.cal-grid .wd.sun{color:var(--scarf)}
+.cal-day{font:inherit;position:relative;aspect-ratio:1/1;max-height:46px;border:0;border-radius:8px;background:none;color:var(--ink);font-size:13.5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-variant-numeric:tabular-nums}
+.cal-day:hover{background:var(--paper)}
+.cal-day.out{color:color-mix(in srgb,var(--muted) 55%,transparent)}
+.cal-day.sun{color:var(--scarf)}
+.cal-day.today{font-weight:700;box-shadow:inset 0 0 0 1.5px var(--accent)}
+.cal-day.sel{background:var(--accent);color:var(--surface)}
+.cal-day .dots{display:flex;gap:2px;height:5px}
+.cal-day .dots i{width:5px;height:5px;border-radius:50%;background:var(--scarf)}
+.cal-day.sel .dots i{background:var(--surface)}
+.cal-list{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.cal-list h4{margin:0 0 6px;font-size:13.5px;color:var(--muted);font-weight:600}
+.cal-list ul{list-style:none;margin:0;padding:0}
+.cal-list li{padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.cal-list li:last-child{border-bottom:0}
+.cal-list .ct{display:flex;gap:10px;align-items:baseline}
+.cal-list .cd{flex:none;font-size:12.5px;color:var(--scarf);font-variant-numeric:tabular-nums;min-width:72px}
+.cal-list .cn{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.cal-list .cm{font-size:12.5px;color:var(--muted);margin:3px 0 0 82px;overflow-wrap:anywhere}
+.cal-list .ca{margin:6px 0 0 82px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.cal-list .ca button{font:inherit;font-size:12px;padding:3px 9px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.cal-list .ca button.cdel{color:var(--scarf)}
+.cal-list .ca input{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;width:120px;background:var(--surface);color:var(--ink)}
+.cal-list .ca .m{font-size:12.5px;color:var(--scarf)}
+.cal-empty{margin:6px 0;font-size:13.5px;color:var(--muted)}
+.cal-form{display:flex;flex-direction:column;gap:6px;margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.cal-form h3{font-size:16px;margin-bottom:2px}
+.cal-form label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.cal-form input,.cal-form textarea{font:inherit;font-size:14px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
+.cal-form .cf2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cal-form .cf2>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cal-form .cf-chk{justify-content:flex-end}
+.cal-form .chk{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--ink);font-weight:500;margin-bottom:8px}
+.cal-form .chk input{width:16px;height:16px;accent-color:var(--scarf)}
+.cal-form .btn.primary{background:var(--accent);color:var(--surface)}
+.cal-form .btn.ghost{border:1px solid var(--line);color:var(--ink);background:var(--surface)}
 /* members */
 .members{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .member{perspective:900px;height:200px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
@@ -540,6 +588,8 @@ footer strong{color:var(--ink);font-size:16px}
   <div class="wwd"><a class="wwd-tile t-seminar" href="#activities" data-act="seminar"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></span><strong>SEMINAR</strong><span>학술 세미나 및 토론</span></a><a class="wwd-tile t-research" href="#activities" data-act="reading"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></span><strong>RESEARCH</strong><span>개발협력 분야 탐구</span></a><a class="wwd-tile t-project" href="#activities" data-act="project"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></span><strong>PROJECT</strong><span>프로젝트 및 실천 활동</span></a><a class="wwd-tile t-sharing" href="#activities" data-act="sharing"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></span><strong>SHARING</strong><span>지식 및 활동 공유</span></a></div>
 </div></section>
 <section class="sec alt home-sec"><div class="wrap">
+<div class="home-split">
+  <div class="hs-notice">
   <div class="h-head"><div class="eyebrow">Notice</div><h2>공지사항</h2></div>
   <ul class="notices notices-all" id="homeNotices">
     <li><span class="tag">소식</span><a href="#about">IPAID 산하 학술모임으로 등록했습니다</a><span class="d mono">2026 2학기</span></li>
@@ -550,6 +600,26 @@ footer strong{color:var(--ink);font-size:16px}
     <li><span class="tag">소식</span><a href="#about" data-sub="about-character">오지 탐험대 캐릭터 ‘지금이’를 공개했습니다</a><span class="d mono">03.26</span></li>
   </ul>
   <a class="more-link" href="#notice">공지사항 더보기 →</a>
+  </div>
+  <aside class="cal" aria-label="일정 달력">
+    <div class="cal-head"><div class="h-head" style="margin:0"><div class="eyebrow">Calendar</div><h2>일정</h2></div><button type="button" class="btn primary" id="calAdd">일정 추가</button></div>
+    <div class="cal-nav"><button type="button" id="calPrev" aria-label="이전 달">‹</button><strong id="calMonth"></strong><button type="button" id="calNext" aria-label="다음 달">›</button></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <form class="cal-form" id="calForm" hidden novalidate>
+      <h3 id="calFormTitle">일정 추가</h3>
+      <label for="cfTitle">제목</label><input id="cfTitle" maxlength="100" placeholder="예: 정기 모임">
+      <div class="cf2"><div><label for="cfDate">날짜</label><input id="cfDate" type="date"></div><div class="cf-chk"><label class="chk"><input type="checkbox" id="cfAll"> 종일</label></div></div>
+      <div class="cf2" id="cfTimes"><div><label for="cfStart">시작</label><input id="cfStart" type="time" value="16:00"></div><div><label for="cfEnd">종료</label><input id="cfEnd" type="time" value="17:00"></div></div>
+      <div id="cfEndDateWrap" hidden><label for="cfEndDate">끝나는 날 (여러 날 일정일 때)</label><input id="cfEndDate" type="date"></div>
+      <label for="cfLoc">장소 (선택)</label><input id="cfLoc" maxlength="200">
+      <label for="cfDesc">메모 (선택)</label><textarea id="cfDesc" rows="3" maxlength="3000"></textarea>
+      <label for="cfAdmin">운영진 코드</label><input id="cfAdmin" type="password" autocomplete="off">
+      <div class="e-btns"><button type="submit" class="btn primary" id="cfSave">저장</button><button type="button" class="btn ghost" id="cfCancel">취소</button></div>
+      <p class="up-msg" id="cfMsg" aria-live="polite"></p>
+    </form>
+    <div class="cal-list" id="calList"><p class="cal-empty">일정을 불러오는 중입니다.</p></div>
+  </aside>
+</div>
 </div></section>
 <section class="sec home-sec"><div class="wrap">
   <div class="cta-band"><div><div class="eyebrow">Join us</div><h2>함께 탐험할 대원을 기다립니다</h2><p>학과 제한 없이, 개발협력에 관심 있는 누구나 함께할 수 있어요.</p></div><div class="btns"><a class="btn primary" href="#join">합류하기</a><a class="btn ghost" href="#about">오지 탐험대 알아보기</a></div></div>
@@ -966,6 +1036,90 @@ window.ojiNotices=(function(){
     show(){if(pending){openId=pending;pending=null;cat="all";const i=sorted().findIndex(x=>x.id===openId);page=i>=0?Math.floor(i/PER)+1:1;render();requestAnimationFrame(()=>{const r=document.querySelector(`.nrow[data-id="${CSS.escape(openId)}"]`);r&&r.scrollIntoView({block:"center"})})}}
   };
 })();
+/* calendar: 대표 계정 "오지 탐험대 일정" 구글 캘린더 */
+window.ojiCal=(function(){
+  let events=null,editId=null,sel=null;
+  const todayStr=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);
+  let ym=todayStr.slice(0,7);
+  const pad=n=>String(n).padStart(2,"0");
+  const addDays=(d,n)=>{const t=new Date(d+"T00:00:00Z");t.setUTCDate(t.getUTCDate()+n);return t.toISOString().slice(0,10)};
+  const WD=["일","월","화","수","목","금","토"];
+  const ERRC={admin:"운영진 코드가 맞지 않아요.",title:"제목을 입력해 주세요.",date:"날짜를 골라 주세요.",notfound:"이 일정을 찾지 못했어요. 새로고침해 주세요.",recurring:"반복 일정은 구글 캘린더에서 고쳐 주세요.",server:"저장하지 못했어요. 잠시 후 다시 시도해 주세요."};
+  let admin="";try{admin=sessionStorage.getItem("ojiAdmin")||""}catch(e){}
+  const keepAdmin=c=>{admin=c;try{sessionStorage.setItem("ojiAdmin",c)}catch(e){}};
+  function days(ev){
+    const s=ev.start.slice(0,10);let e=ev.end.slice(0,10);
+    if(ev.allDay||ev.end.slice(11)==="00:00")e=e>s?addDays(e,-1):s;
+    const out=[];let d=s,guard=0;while(d<=e&&guard++<62){out.push(d);d=addDays(d,1)}return out;
+  }
+  function byDay(){const m={};(events||[]).forEach(ev=>days(ev).forEach(d=>{(m[d]=m[d]||[]).push(ev)}));return m}
+  function label(ev){
+    const s=ev.start.slice(0,10),e=days(ev).slice(-1)[0];const md=d=>`${+d.slice(5,7)}.${+d.slice(8,10)}`;
+    const dd=s===e?md(s):`${md(s)}–${md(e)}`;
+    return ev.allDay?dd:`${dd} ${ev.start.slice(11)}`;
+  }
+  function render(){
+    const [y,m]=ym.split("-").map(Number);
+    $("#calMonth").textContent=`${y}년 ${m}월`;
+    const first=`${ym}-01`,dow=new Date(first+"T00:00:00Z").getUTCDay();
+    const start=addDays(first,-dow),map=byDay();
+    let html=WD.map((w,i)=>`<span class="wd${i===0?" sun":""}">${w}</span>`).join("");
+    for(let i=0;i<42;i++){
+      const d=addDays(start,i);if(i===35&&d.slice(0,7)!==ym)break;
+      const n=(map[d]||[]).length;
+      const cls=["cal-day",d.slice(0,7)!==ym?"out":"",i%7===0?"sun":"",d===todayStr?"today":"",d===sel?"sel":""].filter(Boolean).join(" ");
+      html+=`<button type="button" class="${cls}" data-d="${d}" aria-label="${+d.slice(5,7)}월 ${+d.slice(8,10)}일${n?" 일정 "+n+"개":""}"${d===sel?' aria-pressed="true"':""}><span>${+d.slice(8,10)}</span><span class="dots">${"<i></i>".repeat(Math.min(n,3))}</span></button>`;
+    }
+    $("#calGrid").innerHTML=html;
+    const list=$("#calList");
+    if(!events){list.innerHTML=`<p class="cal-empty">${events===null&&window.__calFailed?"일정을 불러오지 못했어요.":"일정을 불러오는 중입니다."}</p>`;return}
+    let items,head;
+    if(sel){items=(map[sel]||[]);head=`${+sel.slice(5,7)}월 ${+sel.slice(8,10)}일 일정`}
+    else{items=events.filter(ev=>days(ev).some(d=>d.slice(0,7)===ym));head=`${m}월 일정`}
+    items=[...items].sort((a,b)=>a.start.localeCompare(b.start));
+    list.innerHTML=`<h4>${head}</h4>`+(items.length?`<ul>${items.map(ev=>`<li data-id="${esc(ev.id)}"><div class="ct"><span class="cd">${esc(label(ev))}</span><span class="cn">${esc(ev.title)}</span></div>${ev.location||ev.desc?`<div class="cm">${esc([ev.location,ev.desc].filter(Boolean).join(" · "))}</div>`:""}${ev.recurring?"":`<div class="ca"><button type="button" class="ced">수정</button><button type="button" class="cdel">삭제</button></div>`}</li>`).join("")}</ul>`:`<p class="cal-empty">${sel?"이 날은 일정이 없어요.":"이번 달 일정이 아직 없어요."}</p>`);
+  }
+  $("#calPrev").addEventListener("click",()=>{const [y,m]=ym.split("-").map(Number);const d=new Date(Date.UTC(y,m-2,1));ym=d.toISOString().slice(0,7);sel=null;render()});
+  $("#calNext").addEventListener("click",()=>{const [y,m]=ym.split("-").map(Number);const d=new Date(Date.UTC(y,m,1));ym=d.toISOString().slice(0,7);sel=null;render()});
+  $("#calGrid").addEventListener("click",e=>{const b=e.target.closest(".cal-day");if(!b)return;const d=b.dataset.d;if(d.slice(0,7)!==ym){ym=d.slice(0,7)}sel=sel===d?null:d;render()});
+  const toggleAll=()=>{const a=$("#cfAll").checked;$("#cfTimes").hidden=a;$("#cfEndDateWrap").hidden=!a};
+  $("#cfAll").addEventListener("change",toggleAll);
+  function openForm(ev){
+    editId=ev?ev.id:null;$("#calForm").hidden=false;$("#calFormTitle").textContent=ev?"일정 수정":"일정 추가";
+    $("#cfTitle").value=ev?ev.title:"";$("#cfDate").value=ev?ev.start.slice(0,10):(sel||todayStr);$("#cfAll").checked=!!(ev&&ev.allDay);
+    $("#cfStart").value=ev&&!ev.allDay?ev.start.slice(11):"16:00";$("#cfEnd").value=ev&&!ev.allDay?ev.end.slice(11):"17:00";
+    const last=ev?days(ev).slice(-1)[0]:"";$("#cfEndDate").value=ev&&ev.allDay&&last!==ev.start.slice(0,10)?last:"";
+    $("#cfLoc").value=ev?ev.location:"";$("#cfDesc").value=ev?ev.desc:"";$("#cfAdmin").value=admin;$("#cfMsg").textContent="";toggleAll();$("#cfTitle").focus();
+  }
+  $("#calAdd").addEventListener("click",()=>openForm(null));
+  $("#cfCancel").addEventListener("click",()=>{$("#calForm").hidden=true;editId=null});
+  const post=async body=>{const r=await fetch(OJI_API,{method:"POST",body:JSON.stringify(body)});const o=await r.json();if(!o.ok)throw o.error||"server";return o};
+  $("#calForm").addEventListener("submit",async e=>{
+    e.preventDefault();const msg=$("#cfMsg");msg.className="up-msg";
+    const code=$("#cfAdmin").value,title=$("#cfTitle").value.trim(),date=$("#cfDate").value;
+    if(!title){msg.className="up-msg err";msg.textContent=ERRC.title;return}
+    if(!date){msg.className="up-msg err";msg.textContent=ERRC.date;return}
+    if(!code){msg.className="up-msg err";msg.textContent="운영진 코드를 입력해 주세요.";return}
+    $("#cfSave").disabled=true;msg.textContent="구글 캘린더에 저장하는 중이에요…";
+    try{
+      const o=await post({action:editId?"event_update":"event_create",adminCode:code,id:editId,title,date,allDay:$("#cfAll").checked,endDate:$("#cfEndDate").value,startTime:$("#cfStart").value,endTime:$("#cfEnd").value,location:$("#cfLoc").value.trim(),desc:$("#cfDesc").value});
+      keepAdmin(code);events=o.events||[];ym=date.slice(0,7);sel=date;$("#calForm").hidden=true;editId=null;render();
+    }catch(err){msg.className="up-msg err";msg.textContent=ERRC[err]||ERRC.server}
+    finally{$("#cfSave").disabled=false}
+  });
+  $("#calList").addEventListener("click",async e=>{
+    const li=e.target.closest("li");if(!li)return;const ev=(events||[]).find(x=>x.id===li.dataset.id);if(!ev)return;
+    const ca=li.querySelector(".ca");
+    if(e.target.closest(".ced")){openForm(ev);$("#calForm").scrollIntoView({block:"nearest"});return}
+    if(e.target.closest(".cdel")){ca.innerHTML=`<input type="password" placeholder="운영진 코드" value="${esc(admin)}"><button type="button" class="cdel cgo">삭제</button><button type="button" class="cno">취소</button><span class="m"></span>`;ca.querySelector("input").focus();return}
+    if(e.target.closest(".cno")){render();return}
+    if(e.target.closest(".cgo")){const code=ca.querySelector("input").value,m=ca.querySelector(".m");if(!code){m.textContent="운영진 코드를 입력해 주세요.";return}
+      e.target.disabled=true;m.textContent="삭제하는 중…";
+      try{const o=await post({action:"event_delete",adminCode:code,id:ev.id});keepAdmin(code);events=o.events||[];render()}catch(err){e.target.disabled=false;m.textContent=ERRC[err]||ERRC.server}}
+  });
+  render();
+  return{set(ev){if(Array.isArray(ev))events=ev;else{events=null;window.__calFailed=true}render()}};
+})();
 /* archive: Apps Script(대표 드라이브) 목록 + archive.json 목록 */
 (function(){
   const UPLOAD_API=OJI_API; // Apps Script 웹 앱 주소
@@ -1045,7 +1199,7 @@ window.ojiNotices=(function(){
   });
   setF("all");setK("all");render("자료를 불러오는 중입니다.");
   const pJson=fetch("archive.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(d=>{jsonRows=(Array.isArray(d)?d:[]).filter(x=>x&&x.title)}).catch(()=>{});
-  const pApi=API_READY?fetch(UPLOAD_API).then(r=>r.json()).then(d=>{if(d&&d.ok&&Array.isArray(d.items))apiRows=d.items;if(window.ojiNotices)ojiNotices.set(d&&d.notices)}).catch(()=>{apiRows=[];if(window.ojiNotices)ojiNotices.set(null)}):Promise.resolve();
+  const pApi=API_READY?fetch(UPLOAD_API).then(r=>r.json()).then(d=>{if(d&&d.ok&&Array.isArray(d.items))apiRows=d.items;if(window.ojiNotices)ojiNotices.set(d&&d.notices);if(window.ojiCal)ojiCal.set(d&&d.events)}).catch(()=>{apiRows=[];if(window.ojiNotices)ojiNotices.set(null);if(window.ojiCal)ojiCal.set(null)}):Promise.resolve();
   Promise.all([pJson,pApi]).then(()=>render());
   if(!API_READY){$("#upBtn").disabled=true;$("#upMsg").textContent="업로드 기능을 준비하고 있어요.";}
   const ERR={code:"대원 코드가 맞지 않아요.",size:"파일이 10MB보다 커요. 메일로 보내 주세요.",type:"이 형식은 올릴 수 없어요.",title:"제목을 입력해 주세요.",semester:"학기를 다시 골라 주세요.",empty:"빈 파일이에요.",server:"드라이브에 반영하지 못했어요. 잠시 후 다시 시도해 주세요.",notfound:"드라이브에서 이 자료를 찾지 못했어요. 새로고침해 주세요."};

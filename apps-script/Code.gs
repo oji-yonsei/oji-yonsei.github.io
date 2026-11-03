@@ -8,6 +8,9 @@
  * - 공지사항: 대표 드라이브 "오지 탐험대 자료실" 폴더의 "오지 탐험대 공지사항" 시트에 저장됩니다(처음 호출 때 자동 생성).
  *   사이트에서 공지를 쓰고 고치고 지우려면 스크립트 속성에 ADMIN_CODE(운영진 코드)를 추가하세요.
  *   시트에서 직접 고쳐도 사이트에 반영됩니다. 아래쪽 행일수록 최신 공지로 보입니다.
+ * - 일정: 대표 계정의 "오지 탐험대 일정" 구글 캘린더에 저장됩니다(처음 호출 때 자동 생성).
+ *   사이트에서 운영진 코드로 추가·수정·삭제할 수 있고, 구글 캘린더에서 직접 넣은 일정도 사이트에 보입니다.
+ *   프로젝트 설정의 시간대를 "(GMT+09:00) 서울"로 맞춰 두세요.
  */
 const ROOT_ID = "1GbHabez0EURsNq7VChHDylZ7f4aSlj33"; // 오지 탐험대 자료실 폴더
 const KINDS = ["활동 보고서", "활동 사진", "카드뉴스", "발제 자료", "기타"];
@@ -68,9 +71,10 @@ function doGet() {
     }
   }
   items.sort(function (a, b) { return b.date.localeCompare(a.date); });
-  let notices = null;
+  let notices = null, events = null;
   try { notices = readNotices_(); } catch (e) {}
-  return json_({ ok: true, items: items, notices: notices });
+  try { events = readEvents_(); } catch (e) {}
+  return json_({ ok: true, items: items, notices: notices, events: events });
 }
 
 function noticeSheet_() {
@@ -152,6 +156,74 @@ function noticeAction_(d) {
   return { ok: true, notices: readNotices_() };
 }
 
+const CAL_NAME = "오지 탐험대 일정";
+const TZ = "Asia/Seoul";
+
+function cal_() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty("CAL_ID");
+  if (id) { const c = CalendarApp.getCalendarById(id); if (c) return c; }
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const again = props.getProperty("CAL_ID");
+    if (again && again !== id) { const c2 = CalendarApp.getCalendarById(again); if (c2) return c2; }
+    const c = CalendarApp.createCalendar(CAL_NAME, { timeZone: TZ, color: CalendarApp.Color.GREEN });
+    props.setProperty("CAL_ID", c.getId());
+    return c;
+  } finally { lock.releaseLock(); }
+}
+
+function fmt_(d, p) { return Utilities.formatDate(d, TZ, p); }
+
+function readEvents_() {
+  const now = new Date();
+  const from = new Date(now.getTime() - 240 * 864e5), to = new Date(now.getTime() + 400 * 864e5);
+  return cal_().getEvents(from, to).slice(0, 600).map(function (ev) {
+    const all = ev.isAllDayEvent();
+    const s = all ? ev.getAllDayStartDate() : ev.getStartTime();
+    const e = all ? ev.getAllDayEndDate() : ev.getEndTime();
+    return { id: ev.getId(), title: ev.getTitle(), allDay: all, start: fmt_(s, "yyyy-MM-dd'T'HH:mm"), end: fmt_(e, "yyyy-MM-dd'T'HH:mm"),
+      location: ev.getLocation() || "", desc: ev.getDescription() || "", recurring: ev.isRecurringEvent() };
+  });
+}
+
+function eventAction_(d) {
+  const admin = PropertiesService.getScriptProperties().getProperty("ADMIN_CODE");
+  if (!admin || String(d.adminCode || "") !== admin) return { ok: false, error: "admin" };
+  const c = cal_();
+  let ev = null;
+  if (d.action !== "event_create") {
+    ev = c.getEventById(String(d.id || ""));
+    if (!ev) return { ok: false, error: "notfound" };
+    if (ev.isRecurringEvent()) return { ok: false, error: "recurring" };
+    if (d.action === "event_delete") { ev.deleteEvent(); return { ok: true, events: readEvents_() }; }
+  }
+  const title = String(d.title || "").trim().slice(0, 100);
+  if (!title) return { ok: false, error: "title" };
+  const date = String(d.date || "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return { ok: false, error: "date" };
+  const opts = { location: String(d.location || "").slice(0, 200), description: String(d.desc || "").slice(0, 3000) };
+  const day = Utilities.parseDate(date, TZ, "yyyy-MM-dd");
+  if (d.allDay) {
+    let endEx = null;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(String(d.endDate || "")) && d.endDate > date) endEx = new Date(Utilities.parseDate(d.endDate, TZ, "yyyy-MM-dd").getTime() + 864e5);
+    if (ev) {
+      if (endEx) ev.setAllDayDates(day, endEx); else ev.setAllDayDate(day);
+    } else {
+      ev = endEx ? c.createAllDayEvent(title, day, endEx, opts) : c.createAllDayEvent(title, day, opts);
+    }
+  } else {
+    const st = /^\d{2}:\d{2}$/.test(String(d.startTime || "")) ? d.startTime : "09:00";
+    const start = Utilities.parseDate(date + " " + st, TZ, "yyyy-MM-dd HH:mm");
+    let end = /^\d{2}:\d{2}$/.test(String(d.endTime || "")) ? Utilities.parseDate(date + " " + d.endTime, TZ, "yyyy-MM-dd HH:mm") : null;
+    if (!end || end <= start) end = new Date(start.getTime() + 3600e3);
+    if (ev) ev.setTime(start, end); else ev = c.createEvent(title, start, end, opts);
+  }
+  ev.setTitle(title); ev.setLocation(opts.location); ev.setDescription(opts.description);
+  return { ok: true, events: readEvents_() };
+}
+
 function inArchive_(f) {
   const parents = f.getParents();
   while (parents.hasNext()) {
@@ -174,6 +246,7 @@ function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
     if (/^notice_(create|update|delete)$/.test(String(d.action || ""))) return json_(noticeAction_(d));
+    if (/^event_(create|update|delete)$/.test(String(d.action || ""))) return json_(eventAction_(d));
     const code = PropertiesService.getScriptProperties().getProperty("UPLOAD_CODE");
     if (!code || String(d.code || "") !== code) return json_({ ok: false, error: "code" });
     const action = d.action || "upload";
