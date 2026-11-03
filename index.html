@@ -213,6 +213,9 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .card h3{font-family:var(--f-body);font-size:16px;font-weight:600;margin:4px 0 4px;line-height:1.45}
 .card p{margin:0;font-size:13.5px;color:var(--muted)}
 .card .who{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.card .lines{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}
+.card .lines li{font-size:13.5px;color:var(--muted);line-height:1.6}
+.card .lines b{color:var(--ink);font-weight:600;margin-right:6px}
 .chip{font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--ink);background:var(--paper)}
 .chip.k{border-color:transparent;font-weight:600}
 .k-dispatch{background:#dbe8d6;color:#24402c}
@@ -749,7 +752,7 @@ footer strong{color:var(--ink);font-size:16px}
   </div>
 
   <div class="block" id="act-trail">
-    <div class="b-head"><div class="eyebrow">Expedition Log</div><h3>학기별 탐험 기록</h3><p class="b-sub">학기를 고르면 그 학기의 길이 펼쳐지고, 스크롤하면 지금이가 길을 따라 걷습니다.</p></div>
+    <div class="b-head"><div class="eyebrow">Expedition Log</div><h3>주차별 탐험 기록</h3><p class="b-sub">매주 어떤 이야기를 나눴는지, 지금이와 함께 걸어온 길을 따라가 보세요.</p></div>
   <div class="sem-bar"><div class="tabs" role="tablist" id="semTabs"></div><a class="sem-link" href="#archive" id="semArchive">이 학기 자료실 보기 →</a></div>
   <p class="sem-sum" id="semSum"></p>
   <div class="trail-wrap">
@@ -842,13 +845,7 @@ footer strong{color:var(--ink);font-size:16px}
 
 <script>
 const SEMS=[
- {id:"2026-2",label:"2026년 2학기",sum:"IPAID 산하 학술소모임으로 등록하고, 포트폴리오 과정과 함께 읽는 책을 시작한 학기입니다.",stops:[
-  {when:"2학기 시작",title:"IPAID 산하 학술소모임 등록",desc:"빈곤문제국제개발연구원 산하 학술모임으로 정식 등록",k:"club",kl:"등록"},
-  {when:"9월 –",title:"10주 포트폴리오 과정",desc:"사실 → 해석 → 표현. 경험 인벤토리부터 이력서·자기소개서 초안까지",k:"dispatch",kl:"활동"},
-  {when:"9월 –",title:"함께 읽는 책 『왜 세계의 절반은 굶주리는가?』",desc:"주차별로 목차를 나눠 발제하고 영상·기사를 함께 봅니다",k:"edu",kl:"독서"},
-  {when:"11월",title:"3주차 토론 · 설상가상의 전쟁, 무기로 변한 기아",desc:"#제노사이드 #디아스포라 키워드로 토론",k:"share",kl:"토론"},
-  {when:"학기 말",title:"2학기 활동 보고서",desc:"한 학기 활동을 정리해 자료실에 올립니다",k:"club",kl:"예정",future:true}
- ]},
+ {id:"2026-2",label:"2026년 2학기",sum:"매주 화요일, 발제와 시사 분석, 포트폴리오 컨설팅으로 한 걸음씩 나아간 학기입니다.",stops:[{"when": "9월 8일", "who": ["시작"], "title": "나의 경험, 포트폴리오로 정리하기", "desc": "개별 포트폴리오 작성을 위한 초안 작성. 각자의 경험과 활동을 돌아보며 포트폴리오의 기초를 마련합니다.", "tags": [], "k": "club", "kl": "시작"}, {"when": "9월 15일", "who": ["김호정", "이보늬"], "title": "국제개발협력의 새로운 재원과 기후위기", "lines": [["김호정", "국제개발협력에서 민간재원이 주목받는 이유와 ODA의 역할을 살펴봅니다."], ["이보늬", "유럽의 기록적인 가뭄이 원전 가동과 농업, 경제에 미치는 영향을 살펴봅니다."]], "tags": ["영상", "시사 분석"], "k": "dispatch", "kl": "발제"}, {"when": "9월 22일", "who": ["조민서", "황서영", "이나영"], "title": "국경과 사회문제, 서로 다른 시선으로 읽기", "lines": [["조민서", "인도네시아의 담배 산업과 청소년 흡연 등 사회문제를 살펴봅니다."], ["황서영", "스페인 세우타와 모로코의 국경 갈등, 이주 문제를 다룬 경찰 보고서를 분석합니다."], ["이나영", "구성원들과 포트폴리오를 함께 읽으며 경험과 활동을 정리합니다."]], "tags": ["영상", "국제 시사", "포트폴리오 컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "9월 29일", "who": ["정승민", "전진우", "황서영"], "title": "아프리카 개발협력과 국제사회 현안", "lines": [["정승민", "선정한 국제사회 관련 영상을 바탕으로 주요 현안을 살펴봅니다."], ["전진우", "EDCF와 AI 기술을 결합한 한국의 아프리카 시장 진출 및 개발협력 전략을 살펴봅니다."], ["황서영", "구성원들과 포트폴리오를 함께 읽고 의견을 나눕니다."]], "tags": ["영상", "국제 시사", "포트폴리오 컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "10월 6일", "who": ["이나영", "김호정"], "title": "아이티의 위기와 포트폴리오 점검", "lines": [["이나영", "갱단 폭력으로 인한 아이티의 치안 위기와 대규모 국내 실향민 문제를 살펴봅니다."], ["김호정", "구성원들과 포트폴리오를 함께 읽으며 작성 내용을 점검합니다."]], "tags": ["영상", "포트폴리오 컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "10월 13일 · 10월 20일", "who": [], "title": "중간고사 기간", "desc": "학업에 집중하며 잠시 학술모임 활동을 쉬어갑니다.", "tags": [], "k": "edu", "kl": "쉼표"}, {"when": "10월 27일", "who": [], "title": "함께하는 탐험대의 하루", "desc": "구성원들이 함께 식사하며 교류하고 친목을 다지는 시간을 갖습니다.", "tags": [], "k": "share", "kl": "친목"}, {"when": "11월 3일", "who": [], "title": "나만의 시선으로 완성하는 과제", "desc": "개별 과제를 수행하며 그동안 쌓아온 학습 내용을 정리하고 자신만의 결과물로 발전시킵니다.", "tags": [], "k": "edu", "kl": "과제"}, {"when": "학기 말", "who": [], "title": "2학기 활동 보고서", "desc": "한 학기 활동을 정리해 자료실에 올립니다", "tags": [], "k": "club", "kl": "예정", "future": true}]},
  {id:"2026-1",label:"2026년 1학기",sum:"첫 대원을 모집하고 캐릭터 지금이와 함께 출발한 학기입니다.",stops:[
   {when:"3.17 – 3.25",title:"신입부원 모집",desc:"홍보 포스터와 구글 폼으로 첫 대원 모집",k:"club",kl:"모집"},
   {when:"3.26",title:"캐릭터 ‘지금이’ 공개",desc:"인스타그램 @oji_yonsei에 캐릭터 소개 게시",k:"share",kl:"홍보"},
@@ -916,7 +913,7 @@ function renderTrail(id){
   list.innerHTML="";
   sem.stops.forEach(s=>{
     const li=document.createElement("li");li.className="stop"+(s.future?" future":"");
-    li.innerHTML=`<span class="dot"></span><button class="card" type="button"><div class="when mono">${esc(s.when)}</div><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p><div class="who"><span class="chip k k-${s.k}">${esc(s.kl)}</span></div></button>`;
+    li.innerHTML=`<span class="dot"></span><button class="card" type="button"><div class="when mono">${esc([s.when,...(s.who||[])].join(" · "))}</div><h3>${esc(s.title)}</h3>${s.desc?`<p>${esc(s.desc)}</p>`:""}${s.lines?`<ul class="lines">${s.lines.map(([n,t])=>`<li><b>${esc(n)}</b>${esc(t)}</li>`).join("")}</ul>`:""}<div class="who"><span class="chip k k-${s.k}">${esc(s.kl)}</span>${(s.tags||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div></button>`;
     li.querySelector(".card").addEventListener("click",()=>{li.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"})});
     list.appendChild(li);
   });
