@@ -321,6 +321,7 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .news-card .when{font-size:12px;color:var(--scarf)}
 .news-card strong{font-size:16px}
 .news-card span:last-child{font-size:13.5px;color:var(--muted)}
+.notices-all{max-width:880px}
 .notices{list-style:none;margin:0;padding:0;border-top:2px solid var(--accent)}
 .notices li{display:flex;gap:12px;align-items:baseline;padding:13px 2px;border-bottom:1px solid var(--line);font-size:14.5px;min-width:0}
 .notices .tag{flex:none;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;background:var(--khaki-soft);color:var(--ink)}
@@ -485,24 +486,15 @@ footer strong{color:var(--ink);font-size:16px}
   <div class="wwd"><a class="wwd-tile t-seminar" href="#activities" data-act="seminar"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><rect x="22" y="14" width="76" height="46" rx="4"/><path d="M60 60v14M46 80h28M34 30h30M34 40h44M34 50h22"/></svg></span><strong>SEMINAR</strong><span>학술 세미나 및 토론</span></a><a class="wwd-tile t-research" href="#activities" data-act="reading"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M20 24c12-6 26-6 38 0v48c-12-6-26-6-38 0zM58 24c12-6 26-6 38 0v32"/><circle cx="84" cy="62" r="12"/><path d="M93 71l10 10"/></svg></span><strong>RESEARCH</strong><span>개발협력 분야 탐구</span></a><a class="wwd-tile t-project" href="#activities" data-act="project"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M10 80c20-30 40-46 56-46s30 20 44 46"/><path d="M66 34V8l22 8-22 8"/></svg></span><strong>PROJECT</strong><span>프로젝트 및 실천 활동</span></a><a class="wwd-tile t-sharing" href="#activities" data-act="sharing"><span class="art"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M16 18h52v30H38l-12 10V48H16z"/><path d="M58 40h46v28h-8v10l-12-10H58z"/></svg></span><strong>SHARING</strong><span>지식 및 활동 공유</span></a></div>
 </div></section>
 <section class="sec alt home-sec"><div class="wrap">
-  <div class="news-grid">
-    <div>
-      <div class="h-head"><div class="eyebrow">News</div><h2>주요 소식</h2></div>
-      <div class="news">
-        <a class="news-card" href="#about"><span class="when mono">2026 2학기</span><strong>IPAID 산하 학술모임으로 등록</strong><span>연세대학교 빈곤문제국제개발연구원과 함께 활동합니다.</span></a>
-        <a class="news-card" href="#activities" data-act="seminar"><span class="when mono">2026 2학기</span><strong>10주 포트폴리오 과정 진행 중</strong><span>경험 정리부터 이력서·자기소개서 초안까지 함께 만듭니다.</span></a>
-        <a class="news-card" href="#about" data-sub="about-character"><span class="when mono">2026.03.26</span><strong>캐릭터 ‘지금이’ 공개</strong><span>오지 탐험대와 함께 길을 나서는 탐험가를 소개합니다.</span></a>
-      </div>
-    </div>
-    <div>
-      <div class="h-head"><div class="eyebrow">Notice</div><h2>최신 공지</h2></div>
-      <ul class="notices" id="homeNotices">
-        <li><span class="tag">모임</span><a href="#about">2학기 정기 모임은 매주 화요일 오후에 진행됩니다</a></li>
-        <li><span class="tag">독서</span><a href="#activities" data-act="reading">『왜 세계의 절반은 굶주리는가?』 주차별 발제 진행 중</a></li>
-        <li><span class="tag">자료실</span><a href="#archive">자료실에서 활동 보고서와 사진을 볼 수 있어요</a></li>
-      </ul>
-    </div>
-  </div>
+  <div class="h-head"><div class="eyebrow">Notice</div><h2>공지사항</h2></div>
+  <ul class="notices notices-all" id="homeNotices">
+    <li><span class="tag">소식</span><a href="#about">IPAID 산하 학술모임으로 등록했습니다</a><span class="d mono">2026 2학기</span></li>
+    <li><span class="tag">모임</span><a href="#about">2학기 정기 모임은 매주 화요일 오후에 진행됩니다</a><span class="d mono">2026 2학기</span></li>
+    <li><span class="tag">활동</span><a href="#activities" data-act="seminar">10주 포트폴리오 과정이 진행 중입니다</a><span class="d mono">2026 2학기</span></li>
+    <li><span class="tag">독서</span><a href="#activities" data-act="reading">『왜 세계의 절반은 굶주리는가?』 주차별 발제가 진행 중입니다</a><span class="d mono">2026 2학기</span></li>
+    <li><span class="tag">자료실</span><a href="#archive">자료실에서 활동 보고서와 사진을 볼 수 있어요</a><span class="d mono"></span></li>
+    <li><span class="tag">소식</span><a href="#about" data-sub="about-character">오지 탐험대 캐릭터 ‘지금이’를 공개했습니다</a><span class="d mono">03.26</span></li>
+  </ul>
 </div></section>
 <section class="sec home-sec"><div class="wrap">
   <div class="cta-band"><div><div class="eyebrow">Join us</div><h2>함께 탐험할 대원을 기다립니다</h2><p>학과 제한 없이, 개발협력에 관심 있는 누구나 함께할 수 있어요.</p></div><div class="btns"><a class="btn primary" href="#join">합류하기</a><a class="btn ghost" href="#about">오지 탐험대 알아보기</a></div></div>
@@ -677,7 +669,7 @@ footer strong{color:var(--ink);font-size:16px}
 </div></section>
 </main>
 
-<footer id="foot"><div class="wrap"><div><strong>오지 탐험대</strong><br>연세대학교 빈곤문제국제개발연구원(IPAID) 산하 학술모임 · 지도교수 김장생 교수님, 오지은 교수님</div></div></footer>
+<footer id="foot"><div class="wrap"><div><strong>오지 탐험대</strong><br>연세대학교 빈곤문제국제개발연구원(IPAID) 산하 학술모임</div></div></footer>
 
 <script>
 const SEMS=[
@@ -692,10 +684,10 @@ const SEMS=[
   {when:"3.17 – 3.25",title:"신입부원 모집",desc:"홍보 포스터와 구글 폼으로 첫 대원 모집",k:"club",kl:"모집"},
   {when:"3.26",title:"캐릭터 ‘지금이’ 공개",desc:"인스타그램 @oji_yonsei에 캐릭터 소개 게시",k:"share",kl:"홍보"},
   {when:"4.1",title:"1학기 정기 모임 시작",desc:"매주 모여 개발협력 이야기를 나누기 시작",k:"club",kl:"출발"},
-  {when:"4월 – 6월",title:"해외봉사 사례 경험 공유",desc:"대원들의 현장 경험을 나누는 시간",k:"share",kl:"공유"},
-  {when:"4월 – 6월",title:"개발협력 사업 사례 분석과 토의",desc:"실제 사업 사례를 읽고 함께 토론",k:"edu",kl:"토의"},
-  {when:"4월 – 6월",title:"적정기술과 현지 맞춤형 솔루션 토의",desc:"현장에 맞는 해법을 주제로 토의",k:"edu",kl:"토의"},
-  {when:"4월 – 6월",title:"뉴스 속 개발협력 이야기",desc:"그 주의 개발협력 뉴스를 함께 읽기",k:"edu",kl:"뉴스"},
+  {when:"4월",title:"해외봉사 사례 경험 공유",desc:"대원들의 현장 경험을 나누는 시간",k:"share",kl:"공유"},
+  {when:"5월",title:"개발협력 사업 사례 분석과 토의",desc:"실제 사업 사례를 읽고 함께 토론",k:"edu",kl:"토의"},
+  {when:"5월 – 6월",title:"적정기술과 현지 맞춤형 솔루션 토의",desc:"현장에 맞는 해법을 주제로 토의",k:"edu",kl:"토의"},
+  {when:"5월 – 6월",title:"뉴스 속 개발협력 이야기",desc:"그 주의 개발협력 뉴스를 함께 읽기",k:"edu",kl:"뉴스"},
   {when:"6.22",title:"1학기 활동 마무리",desc:"활동 보고서는 자료실에서 볼 수 있어요",k:"club",kl:"마무리"}
  ]}
 ];
