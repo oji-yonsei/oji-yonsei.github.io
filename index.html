@@ -1,5 +1,12 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>오지 탐험대</title>
+<meta name="description" content="연세대학교 빈곤문제국제개발연구원(IPAID) 산하 개발협력 학술모임 오지 탐험대">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;font-size:14px}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -443,6 +450,9 @@ footer{border-top:1px solid var(--line);margin-top:80px;background:var(--surface
 footer .wrap{padding-block:28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 footer strong{color:var(--ink);font-size:16px}
 </style>
+</head>
+<body>
+
 
 <div class="util"><div class="wrap"><span>연세대학교 빈곤문제국제개발연구원 <a class="ipaid-link" href="https://ipaid.yonsei.ac.kr/ipaid/index.do" target="_blank" rel="noopener" title="IPAID 홈페이지 열기">IPAID</a> 산하 학술모임</span><span>매주 화요일 오후</span></div></div>
 
@@ -485,7 +495,7 @@ footer strong{color:var(--ink);font-size:16px}
       <ul class="notices" id="homeNotices">
         <li><span class="tag">모임</span><a href="#about">2학기 정기 모임은 매주 화요일 오후에 진행됩니다</a></li>
         <li><span class="tag">독서</span><a href="#activities" data-act="reading">『왜 세계의 절반은 굶주리는가?』 주차별 발제 진행 중</a></li>
-        <li><span class="tag">자료실</span><a href="#archive">자료실에서 활동 보고서와 사진을 볼 수 있어요</a></li>
+        <li><span class="tag">아카이브</span><a href="#archive">아카이브에서 활동 보고서와 사진을 볼 수 있어요</a></li>
       </ul>
     </div>
   </div>
@@ -615,25 +625,7 @@ footer strong{color:var(--ink);font-size:16px}
       <div class="arch-list" id="archList"><p class="arch-empty">자료를 불러오는 중입니다.</p></div>
     </div>
     <aside class="arch-side">
-      <form class="upload" id="upForm" hidden>
-        <h3>자료 올리기</h3>
-        <label for="upTitle">제목</label><input id="upTitle" required maxlength="80" placeholder="예: 2026년 1학기 활동 보고서">
-        <div class="two">
-          <div><label for="upSem">학기</label><select id="upSem"></select></div>
-          <div><label for="upKind">분류</label><select id="upKind"><option>활동 보고서</option><option>활동 사진</option><option>카드뉴스</option><option>발제 자료</option><option>기타</option></select></div>
-        </div>
-        <label for="upFile">파일</label><input id="upFile" type="file" required accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.mp4,.csv,.md,.txt,.json">
-        <p class="hint">PDF, 이미지, 영상, CSV·텍스트 파일을 올릴 수 있어요(최대 20MB). 한글·워드 파일은 PDF로 저장해서 올려 주세요.</p>
-        <button class="btn primary" type="submit" id="upBtn">올리기</button>
-        <p class="up-msg" id="upMsg" aria-live="polite"></p>
-      </form>
-      <div class="backup" id="backup" hidden>
-        <h3>구글 드라이브 백업</h3>
-        <p id="bkInfo">대표 계정 드라이브의 “오지 탐험대 자료실” 폴더에 학기별로 저장합니다.</p>
-        <button class="btn primary" type="button" id="bkBtn">드라이브로 백업하기</button>
-        <p class="up-msg" id="bkMsg" aria-live="polite"></p>
-      </div>
-      <div class="up-off" id="upOff"><h3>자료 올리기</h3><p>자료는 이 페이지의 참여 권한을 받은 대원만 올릴 수 있어요. 권한이 필요하면 모임장에게 요청해 주세요.</p></div>
+      <div class="up-off"><h3>자료 보내기</h3><p>아카이브 자료는 운영진이 정리해 올립니다. 활동 보고서, 사진, 카드뉴스처럼 남기고 싶은 자료가 있다면 메일로 보내 주세요.</p><a class="btn primary" style="margin-top:6px;justify-content:center;background:var(--accent);color:var(--surface)" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=seoy0725@yonsei.ac.kr&amp;su=%5B%EC%98%A4%EC%A7%80%20%ED%83%90%ED%97%98%EB%8C%80%5D%20%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C%20%EC%9E%90%EB%A3%8C%20%EC%A0%9C%EC%B6%9C&amp;body=%EC%9E%90%EB%A3%8C%20%EC%A0%9C%EB%AA%A9%3A%0A%ED%95%99%EA%B8%B0%3A%0A%EB%B6%84%EB%A5%98%28%ED%99%9C%EB%8F%99%20%EB%B3%B4%EA%B3%A0%EC%84%9C/%ED%99%9C%EB%8F%99%20%EC%82%AC%EC%A7%84/%EC%B9%B4%EB%93%9C%EB%89%B4%EC%8A%A4/%EB%B0%9C%EC%A0%9C%20%EC%9E%90%EB%A3%8C/%EA%B8%B0%ED%83%80%29%3A%0A%ED%8C%8C%EC%9D%BC%EC%9D%80%20%EC%B2%A8%EB%B6%80%ED%95%B4%20%EC%A3%BC%EC%84%B8%EC%9A%94.%0A" target="_blank" rel="noopener">메일로 자료 보내기</a></div>
     </aside>
   </div>
 </div></section>
@@ -809,118 +801,40 @@ document.querySelectorAll(".member").forEach(m=>m.addEventListener("click",()=>m
 const LINES=["안녕하세요, 오지 탐험대의 지금이에요!","제 목표는 국제개발협력 전문가가 되어 세계를 돌아다니는 거예요.","여행지에 가면 특색 있는 디저트 맛집부터 찾아요.","다양한 나라의 친구를 사귀고 싶어요.","해외봉사 이야기, 개발협력 사례, 같이 나눠요!"];
 let li=0;const ji=$("#ji");
 ji.addEventListener("click",()=>{li=(li+1)%LINES.length;$("#bubble").textContent=LINES[li];ji.classList.remove("hop");void ji.offsetWidth;ji.classList.add("hop")});
-/* archive */
+/* archive: archive.json 목록을 읽어 보여줍니다 (운영진이 저장소에서 관리) */
 (function(){
-  let filter="all",rows=[],me=null,editor=false,assets=null,db=null,col=null,mcp=null,busy=false;
-  const DRIVE_ROOT="1GbHabez0EURsNq7VChHDylZ7f4aSlj33";
-  const DRIVE_FOLDERS={"2026-1":"1PPd6K02gOM6ryHSOs2BmyijPB0R-4Bz9","2026-2":"1GoJ_iHxcRN9a6DHFgYX04WCpI-4Vh41O"};
-  const okDrive=u=>typeof u==="string"&&/^https:\/\/(drive|docs)\.google\.com\//.test(u);
-  const kinds={"학기 종료 보고서":"rep","활동 보고서":"rep","카드뉴스":"card"};let kindF="all";
-  const KF=["all","활동 보고서","활동 사진","카드뉴스","발제 자료","기타"];
-  $("#archKinds").innerHTML=KF.map(k=>`<button type="button" data-k="${k}">${k==="all"?"모든 분류":esc(k)}</button>`).join("");
-  const setK=k=>{kindF=k;document.querySelectorAll("#archKinds button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k));render()};
-  document.querySelectorAll("#archKinds button").forEach(b=>b.addEventListener("click",()=>setK(b.dataset.k)));
-  const semLabel=id=>(SEMS.find(x=>x.id===id)||{label:id}).label;
+  let filter="all",kindF="all",rows=[];
+  const kinds={"활동 보고서":"rep","카드뉴스":"card"};
+  const semLabel=id=>(SEMS.find(x=>x.id===id)||{label:id||""}).label;
+  const okUrl=u=>typeof u==="string"&&/^https:\/\//.test(u);
   const tabs=[["all","전체"],...SEMS.map(x=>[x.id,x.label])];
   $("#archTabs").innerHTML=tabs.map(([id,l])=>`<button type="button" role="tab" id="arch-${id}" data-f="${id}">${esc(l)}</button>`).join("");
-  $("#upSem").innerHTML=SEMS.map(x=>`<option value="${x.id}">${esc(x.label)}</option>`).join("");
-  function setF(f){filter=f;document.querySelectorAll("#archTabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.f===f));if(f!=="all")$("#upSem").value=f;render()}
+  const KF=["all","활동 보고서","활동 사진","카드뉴스","발제 자료","기타"];
+  $("#archKinds").innerHTML=KF.map(k=>`<button type="button" data-k="${k}">${k==="all"?"모든 분류":esc(k)}</button>`).join("");
+  function setF(f){filter=f;document.querySelectorAll("#archTabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.f===f));render()}
+  function setK(k){kindF=k;document.querySelectorAll("#archKinds button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===k));render()}
   window.setArchiveSem=setF;
   document.querySelectorAll("#archTabs button").forEach(b=>b.addEventListener("click",()=>setF(b.dataset.f)));
-  const fmt=n=>n>1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB";
-  function render(note){
-    updBackup();
-    const kOf=r=>r.kind==="학기 종료 보고서"?"활동 보고서":(r.kind||"기타");
-    const list=rows.filter(r=>(filter==="all"||r.semester===filter)&&(kindF==="all"||kOf(r)===kindF));
-    homeNotices();
-    $("#archCount").textContent=db?`자료 ${list.length}건`:"";
-    if(note){$("#archList").innerHTML=`<p class="arch-empty">${esc(note)}</p>`;return}
-    if(!list.length){$("#archList").innerHTML=`<p class="arch-empty">${filter==="all"?"아직 올라온 자료가 없어요.":esc(semLabel(filter))+"에 올라온 자료가 아직 없어요."}<br>활동 보고서나 사진을 첫 자료로 올려 보세요.</p>`;return}
-    $("#archList").innerHTML=list.map(r=>{
-      const mine=me&&r.uploader===me;const canDel=(mine&&assets)||editor;
-      const d=(r.createdAt||"").slice(0,10).replace(/-/g,".");
-      const img=/^image\//.test(r.contentType||"");
-      return `<div class="arow" data-id="${esc(r._id)}">${img?`<img class="thumb" src="/_blob/${encodeURIComponent(r.assetId)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:`<span class="kind ${kinds[r.kind]||""}">${esc(kOf(r))}</span>`}<div class="t"><a href="/_blob/${encodeURIComponent(r.assetId)}" target="_blank" rel="noopener">${esc(r.title||r.fileName||"제목 없음")}</a><small>${esc(semLabel(r.semester))} · ${esc(r.fileName||"")} · ${fmt(r.sizeBytes||0)}${d?" · "+d:""}${okDrive(r.driveUrl)?` · <a class="drv" href="${esc(r.driveUrl)}" target="_blank" rel="noopener">드라이브 저장됨</a>`:""}</small></div><div class="acts"><a href="/_blob/${encodeURIComponent(r.assetId)}" target="_blank" rel="noopener">열기</a>${canDel?`<button type="button" class="del">삭제</button>`:""}</div></div>`;
-    }).join("");
-    document.querySelectorAll("#archList .del").forEach(btn=>btn.addEventListener("click",async()=>{
-      if(!btn.classList.contains("confirm")){btn.classList.add("confirm");btn.textContent="정말 삭제";setTimeout(()=>{btn.classList.remove("confirm");btn.textContent="삭제"},4000);return}
-      const id=btn.closest(".arow").dataset.id;const r=rows.find(x=>x._id===id);btn.disabled=true;
-      try{ if(assets&&r.assetId){try{await assets.delete(r.assetId)}catch(e){if(e&&e.code!=="not_uploader")throw e}} await col.doc(id).delete(); }
-      catch(e){btn.disabled=false;btn.textContent="삭제 실패"}
-    }));
-  }
+  document.querySelectorAll("#archKinds button").forEach(b=>b.addEventListener("click",()=>setK(b.dataset.k)));
   function homeNotices(){
     const ul=$("#homeNotices");if(!ul)return;ul.querySelectorAll(".dyn").forEach(x=>x.remove());
-    rows.slice(0,3).forEach(r=>{const li=document.createElement("li");li.className="dyn";li.innerHTML=`<span class="tag new">새 자료</span><a href="#archive">${esc(r.title||r.fileName||"새 자료")}</a><span class="d mono">${esc((r.createdAt||"").slice(5,10).replace("-","."))}</span>`;ul.prepend(li)});
+    rows.slice(0,3).reverse().forEach(r=>{const li=document.createElement("li");li.className="dyn";li.innerHTML=`<span class="tag new">새 자료</span><a href="#archive">${esc(r.title||"새 자료")}</a><span class="d mono">${esc((r.date||"").slice(5).replace("-","."))}</span>`;ul.prepend(li)});
+  }
+  function render(note){
+    if(note){$("#archList").innerHTML=`<p class="arch-empty">${esc(note)}</p>`;$("#archCount").textContent="";return}
+    const list=rows.filter(r=>(filter==="all"||r.semester===filter)&&(kindF==="all"||(r.kind||"기타")===kindF));
+    $("#archCount").textContent=`자료 ${list.length}건`;
+    if(!list.length){$("#archList").innerHTML=`<p class="arch-empty">${filter==="all"?"아직 올라온 자료가 없어요.":esc(semLabel(filter))+"에 올라온 자료가 아직 없어요."}</p>`;return}
+    $("#archList").innerHTML=list.map(r=>{
+      const url=okUrl(r.url)?r.url:"";const d=(r.date||"").replace(/-/g,".");
+      return `<div class="arow"><span class="kind ${kinds[r.kind]||""}">${esc(r.kind||"기타")}</span><div class="t">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.title||"제목 없음")}</a>`:`<b>${esc(r.title||"제목 없음")}</b>`}<small>${esc(semLabel(r.semester))}${d?" · "+esc(d):""}${r.note?" · "+esc(r.note):""}</small></div><div class="acts">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">열기</a>`:""}</div></div>`;
+    }).join("");
   }
   setF("all");setK("all");
-  const TYPES={pdf:"application/pdf",png:"image/png",jpg:"image/jpeg",jpeg:"image/jpeg",gif:"image/gif",webp:"image/webp",mp4:"video/mp4",csv:"text/csv",md:"text/markdown",txt:"text/plain",json:"application/json"};
-  const ERR={too_large:"파일이 너무 커요. 20MB 이하로 줄여 주세요.",unsupported_type:"이 형식은 올릴 수 없어요. PDF나 이미지로 바꿔 주세요.",quota_or_state:"자료실 저장 공간이 가득 찼어요.",rate_limited:"잠시 후 다시 시도해 주세요.",not_granted:"업로드 권한이 없어요."};
-  (async()=>{
-    if(!window.claude||!claude.use){render("이 화면에서는 자료실을 불러올 수 없어요. claude.ai에서 열어 주세요.");return}
-    const [d,u,a]=await Promise.all([claude.use("db"),claude.use("user"),claude.use("assets")]);
-    db=d;assets=a;
-    if(u){try{me=await u.id()}catch(e){};try{editor=!!u.canEdit()}catch(e){}}
-    $("#upForm").hidden=!assets;$("#upOff").hidden=!!assets;
-    if(editor){try{mcp=await claude.use("mcp")}catch(e){mcp=null}}
-    updBackup();
-    if(!db){render("로그인하면 자료실을 볼 수 있어요.");return}
-    col=db.collection("archive");
-    let t=setTimeout(()=>render("자료실에 아직 연결되지 않았어요. 잠시 후 다시 열어 주세요."),10000);
-    col.orderBy("createdAt","desc").onSnapshot(snap=>{
-      if(!snap.metadata.fromCache)clearTimeout(t);
-      rows=snap.docs.map(x=>({...x.data(),_id:x.id}));render();
-    },e=>{clearTimeout(t);render("자료실을 불러오지 못했어요. 페이지를 새로 열어 주세요.")});
-  })();
-  function updBackup(){
-    const box=$("#backup");if(!box)return;
-    box.hidden=!(editor&&mcp&&col);
-    if(box.hidden||busy)return;
-    const n=rows.filter(r=>!r.driveId).length;
-    $("#bkInfo").textContent=n?`아직 드라이브에 없는 자료 ${n}건이 있어요. 대표 계정 드라이브의 학기별 폴더에 저장합니다.`:"모든 자료가 드라이브에 저장되어 있어요.";
-    $("#bkBtn").disabled=!n;
-  }
-  const B64=buf=>{let s="";const b=new Uint8Array(buf);for(let i=0;i<b.length;i+=32768)s+=String.fromCharCode.apply(null,b.subarray(i,i+32768));return btoa(s)};
-  const MCPERR={server_not_connected:"이 계정에 Google Drive가 연결되어 있지 않아요. claude.ai 설정의 커넥터에서 연결해 주세요.",needs_reauth:"Google Drive 연결이 만료됐어요. 커넥터에서 다시 연결해 주세요.",not_in_manifest:"이 페이지에서 Google Drive 사용이 허용되지 않았어요. 아티팩트 권한 메뉴에서 허용해 주세요.",approval_required:"Google Drive 저장 승인이 필요해요. 다시 눌러 승인해 주세요.",blocked_by_policy:"조직 정책으로 Google Drive 저장이 막혀 있어요."};
-  $("#bkBtn").addEventListener("click",async()=>{
-    if(busy||!mcp)return;busy=true;const btn=$("#bkBtn"),msg=$("#bkMsg");btn.disabled=true;msg.className="up-msg";
-    let fileArgs=false;try{fileArgs=!!(await mcp.listTools()).fileArgs}catch(e){}
-    const todo=rows.filter(r=>!r.driveId);let ok=0,skip=0,stop="";
-    for(let i=0;i<todo.length;i++){
-      const r=todo[i];msg.textContent=`${i+1}/${todo.length} 저장 중… ${r.title||r.fileName}`;
-      try{
-        const res=await fetch("/_blob/"+encodeURIComponent(r.assetId));if(!res.ok)throw {code:"blob"};
-        const blob=await res.blob();const type=r.contentType||blob.type;
-        const ext=((r.fileName||"").split(".").pop()||"bin").toLowerCase().replace(/[^a-z0-9]/g,"")||"bin";
-        let content;
-        if(fileArgs)content={$file:{data:blob,name:"file."+ext,type}};
-        else if(blob.size<700000)content=B64(await blob.arrayBuffer());
-        else{skip++;continue}
-        const out=await mcp.callTool("Google Drive","create_file",{title:`[${r.kind||"기타"}] ${r.title||r.fileName}.${ext}`,parentId:DRIVE_FOLDERS[r.semester]||DRIVE_ROOT,contentMimeType:type,disableConversionToGoogleType:true,base64Content:content},{cache:false});
-        const p=out&&out.payload||{};
-        await col.doc(r._id).update({driveId:String(p.id||"saved"),driveUrl:okDrive(p.viewUrl)?p.viewUrl:"",backedUpAt:new Date().toISOString()});
-        ok++;
-      }catch(e){if(e&&MCPERR[e.code]){stop=MCPERR[e.code];break}skip++}
-    }
-    busy=false;
-    if(stop){msg.className="up-msg err";msg.textContent=stop}
-    else{msg.className=skip?"up-msg err":"up-msg";msg.textContent=`${ok}건을 드라이브에 저장했어요.`+(skip?` ${skip}건은 저장하지 못했어요${fileArgs?"":" (큰 파일은 이 화면에서 백업할 수 없어요)"}.`:"")}
-    updBackup();
-  });
-  $("#upForm").addEventListener("submit",async e=>{
-    e.preventDefault();if(!assets||!col)return;
-    const f=$("#upFile").files[0];const title=$("#upTitle").value.trim();if(!f||!title)return;
-    const ext=(f.name.split(".").pop()||"").toLowerCase();const type=TYPES[ext];
-    const msg=$("#upMsg");msg.className="up-msg";
-    if(!type){msg.className="up-msg err";msg.textContent="이 형식은 올릴 수 없어요. PDF나 이미지로 바꿔 주세요.";return}
-    $("#upBtn").disabled=true;msg.textContent="올리는 중…";
-    try{
-      const res=await assets.upload(f,{type});
-      await col.add({title,semester:$("#upSem").value,kind:$("#upKind").value,fileName:f.name,assetId:res.id,contentType:res.contentType,sizeBytes:res.sizeBytes,createdAt:new Date().toISOString(),uploader:me||""});
-      msg.textContent="올렸어요.";$("#upTitle").value="";$("#upFile").value="";setF($("#upSem").value);
-    }catch(err){msg.className="up-msg err";msg.textContent=ERR[err&&err.code]||"올리지 못했어요. 다시 시도해 주세요."}
-    finally{$("#upBtn").disabled=false}
-  });
+  fetch("archive.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(data=>{
+    rows=(Array.isArray(data)?data:[]).filter(x=>x&&x.title).sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+    render();homeNotices();
+  }).catch(()=>{rows=[];render()});
 })();
 /* reading tabs */
 function showWeek(i){
@@ -934,4 +848,5 @@ showWeek(3);
 
 </script>
 
-</body></html>
+</body>
+</html>
