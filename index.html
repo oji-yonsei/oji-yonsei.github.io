@@ -267,6 +267,17 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .arow .acts{display:flex;gap:6px}
 .arow .acts a,.arow .acts button{font:inherit;font-size:13px;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--ink);text-decoration:none;cursor:pointer}
 .arow .acts button.del{color:var(--scarf)}
+.aedit{padding:16px;border-bottom:1px solid var(--line);background:var(--paper)}
+.aedit label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.aedit input,.aedit select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
+.e-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.e-grid .wide{grid-column:1/-1}
+.e-btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.e-btns .btn{padding:8px 16px}
+.aedit .btn.primary{background:var(--accent);color:var(--surface)}
+.aedit .btn.ghost{border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.e-warn{margin:0 0 10px;font-size:14px;color:var(--scarf)}
+@media (max-width:560px){.e-grid{grid-template-columns:1fr}}
 .arow .acts button.del.confirm{background:var(--scarf);border-color:var(--scarf);color:var(--surface)}
 .arch-empty{margin:0;padding:36px 20px;text-align:center;color:var(--muted);font-size:14px}
 .arch-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:14px}
@@ -848,15 +859,53 @@ ji.addEventListener("click",()=>{li=(li+1)%LINES.length;$("#bubble").textContent
       const img=r.id&&/^image\//.test(r.mime||"");
       const lead=img?`<img class="thumb" src="https://drive.google.com/thumbnail?id=${encodeURIComponent(r.id)}&sz=w160" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`:`<span class="kind ${kinds[r.kind]||""}">${esc(r.kind||"기타")}</span>`;
       const meta=[semLabel(r.semester),img?r.kind:"",fmt(r.size),d,r.uploader].filter(Boolean).map(esc).join(" · ");
-      return `<div class="arow">${lead}<div class="t">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.title||"제목 없음")}</a>`:`<b>${esc(r.title||"제목 없음")}</b>`}<small>${meta}</small></div><div class="acts">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">열기</a>`:""}</div></div>`;
+      return `<div class="arow"${r.id?` data-id="${esc(r.id)}"`:""}>${lead}<div class="t">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(r.title||"제목 없음")}</a>`:`<b>${esc(r.title||"제목 없음")}</b>`}<small>${meta}</small></div><div class="acts">${url?`<a href="${esc(url)}" target="_blank" rel="noopener">열기</a>`:""}${r.id&&API_READY?`<button type="button" class="ed">수정</button><button type="button" class="del">삭제</button>`:""}</div></div>`;
     }).join("");
   }
+  let savedCode="";try{savedCode=sessionStorage.getItem("ojiCode")||""}catch(e){}
+  const getCode=()=>savedCode||$("#upCode").value||"";
+  const keepCode=c=>{savedCode=c;try{sessionStorage.setItem("ojiCode",c)}catch(e){}};
+  const post=async body=>{const res=await fetch(UPLOAD_API,{method:"POST",body:JSON.stringify(body)});const out=await res.json();if(!out.ok)throw out.error||"server";return out};
+  $("#archList").addEventListener("click",async e=>{
+    const btn=e.target.closest("button");if(!btn)return;
+    const row=btn.closest(".arow");
+    if(btn.classList.contains("ed")||btn.classList.contains("del")){
+      document.querySelectorAll(".aedit").forEach(x=>x.remove());
+      const r=apiRows.find(x=>x.id===row.dataset.id);if(!r)return;
+      const box=document.createElement("div");box.className="aedit";box.dataset.id=r.id;
+      const codeField=`<div><label>대원 코드</label><input type="password" class="e-code" autocomplete="off" value="${esc(getCode())}"></div>`;
+      if(btn.classList.contains("ed")){
+        box.innerHTML=`<div class="e-grid"><div class="wide"><label>제목</label><input class="e-title" maxlength="80" value="${esc(r.title||"")}"></div><div><label>학기</label><select class="e-sem">${SEMS.map(x=>`<option value="${x.id}"${x.id===r.semester?" selected":""}>${esc(x.label)}</option>`).join("")}</select></div><div><label>분류</label><select class="e-kind">${KF.slice(1).map(k=>`<option${k===r.kind?" selected":""}>${esc(k)}</option>`).join("")}</select></div>${codeField}</div><div class="e-btns"><button type="button" class="btn primary e-save">저장</button><button type="button" class="btn ghost e-cancel">취소</button><span class="up-msg e-msg" aria-live="polite"></span></div>`;
+      }else{
+        box.innerHTML=`<p class="e-warn">“${esc(r.title||"")}” 자료를 삭제할까요? 사이트 목록에서 사라지고 구글 드라이브 휴지통으로 옮겨져요.</p><div class="e-grid">${codeField}</div><div class="e-btns"><button type="button" class="btn primary e-delete">삭제</button><button type="button" class="btn ghost e-cancel">취소</button><span class="up-msg e-msg" aria-live="polite"></span></div>`;
+      }
+      row.after(box);(box.querySelector(".e-title")||box.querySelector(".e-code")).focus();return;
+    }
+  });
+  $("#archList").addEventListener("click",async e=>{
+    const btn=e.target.closest(".aedit button");if(!btn)return;
+    const box=btn.closest(".aedit"),msg=box.querySelector(".e-msg");
+    if(btn.classList.contains("e-cancel")){box.remove();return}
+    const code=box.querySelector(".e-code").value;
+    if(!code){msg.className="up-msg e-msg err";msg.textContent="대원 코드를 입력해 주세요.";return}
+    box.querySelectorAll("button").forEach(b=>b.disabled=true);msg.className="up-msg e-msg";msg.textContent="드라이브에 반영하는 중이에요…";
+    try{
+      if(btn.classList.contains("e-delete")){
+        await post({action:"delete",code,id:box.dataset.id});keepCode(code);
+        apiRows=apiRows.filter(x=>x.id!==box.dataset.id);render();
+      }else{
+        const title=box.querySelector(".e-title").value.trim();if(!title)throw "title";
+        const out=await post({action:"update",code,id:box.dataset.id,title,semester:box.querySelector(".e-sem").value,kind:box.querySelector(".e-kind").value});keepCode(code);
+        const i=apiRows.findIndex(x=>x.id===box.dataset.id);if(i>=0)apiRows[i]=Object.assign({},apiRows[i],out.item);render();
+      }
+    }catch(err){box.querySelectorAll("button").forEach(b=>b.disabled=false);msg.className="up-msg e-msg err";msg.textContent=ERR[err]||ERR.server}
+  });
   setF("all");setK("all");render("자료를 불러오는 중입니다.");
   const pJson=fetch("archive.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(d=>{jsonRows=(Array.isArray(d)?d:[]).filter(x=>x&&x.title)}).catch(()=>{});
   const pApi=API_READY?fetch(UPLOAD_API).then(r=>r.json()).then(d=>{if(d&&d.ok&&Array.isArray(d.items))apiRows=d.items}).catch(()=>{apiRows=[]}):Promise.resolve();
   Promise.all([pJson,pApi]).then(()=>render());
   if(!API_READY){$("#upBtn").disabled=true;$("#upMsg").textContent="업로드 기능을 준비하고 있어요.";}
-  const ERR={code:"대원 코드가 맞지 않아요.",size:"파일이 10MB보다 커요. 메일로 보내 주세요.",type:"이 형식은 올릴 수 없어요.",title:"제목을 입력해 주세요.",semester:"학기를 다시 골라 주세요.",empty:"빈 파일이에요.",server:"드라이브에 저장하지 못했어요. 잠시 후 다시 시도해 주세요."};
+  const ERR={code:"대원 코드가 맞지 않아요.",size:"파일이 10MB보다 커요. 메일로 보내 주세요.",type:"이 형식은 올릴 수 없어요.",title:"제목을 입력해 주세요.",semester:"학기를 다시 골라 주세요.",empty:"빈 파일이에요.",server:"드라이브에 반영하지 못했어요. 잠시 후 다시 시도해 주세요.",notfound:"드라이브에서 이 자료를 찾지 못했어요. 새로고침해 주세요."};
   const MIME={pdf:"application/pdf",jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",gif:"image/gif",webp:"image/webp",heic:"image/heic",mp4:"video/mp4",mov:"video/quicktime",txt:"text/plain",csv:"text/csv"};
   $("#upForm").addEventListener("submit",async e=>{
     e.preventDefault();if(!API_READY)return;
@@ -873,7 +922,7 @@ ji.addEventListener("click",()=>{li=(li+1)%LINES.length;$("#bubble").textContent
       const res=await fetch(UPLOAD_API,{method:"POST",body:JSON.stringify({code,title,semester:$("#upSem").value,kind:$("#upKind").value,uploader:$("#upName").value.trim(),fileName:f.name,mime:f.type||MIME[ext]||"application/octet-stream",data})});
       const out=await res.json();
       if(!out.ok)throw out.error||"server";
-      apiRows.unshift(out.item);msg.textContent="올렸어요. 구글 드라이브에도 저장됐어요.";
+      keepCode(code);apiRows.unshift(out.item);msg.textContent="올렸어요. 구글 드라이브에도 저장됐어요.";
       $("#upTitle").value="";$("#upFile").value="";setF(out.item.semester);
     }catch(err){msg.className="up-msg err";msg.textContent=ERR[err]||ERR.server}
     finally{$("#upBtn").disabled=false}
