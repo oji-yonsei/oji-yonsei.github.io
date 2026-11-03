@@ -478,6 +478,13 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .cal-form .btn.primary{background:var(--accent);color:var(--surface)}
 .cal-form .btn.ghost{border:1px solid var(--line);color:var(--ink);background:var(--surface)}
 .book-stage{perspective:1400px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.book-stage{position:relative}
+.book.curl-sheet{position:absolute;z-index:2;margin:0;transition:none!important;animation:none!important}
+.curl-flap{position:absolute;z-index:3;pointer-events:none;border-radius:6px 14px 14px 6px;filter:drop-shadow(-6px -6px 10px rgba(0,0,0,.18))}
+:root{--flap-1:#fbf7ee;--flap-2:#d9cfb8}
+:root[data-theme="dark"]{--flap-1:#3a4236;--flap-2:#22291f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--flap-1:#3a4236;--flap-2:#22291f}}
+
 .book{transform-origin:left center;transition:transform .3s ease,opacity .3s ease;backface-visibility:hidden}
 .book.turn-out-next{transform:rotateY(-80deg);opacity:.2}
 .book.turn-out-prev{transform:rotateY(80deg);opacity:.2;transform-origin:right center}
@@ -1270,13 +1277,38 @@ function fillBook(){
   else $("#panel").innerHTML=`<p class="arch-empty" style="padding:28px 10px">주차별 읽기 계획이 아직 없어요.</p>`;
   $("#bkNote").textContent=b.note||"";$("#bkNote").hidden=!b.note;
 }
+function curlPoly(c){ // 보이는 쪽(u+v<=c)과 접힌 날개
+  const P=a=>"polygon("+a.map(([u,v])=>`${(u*100).toFixed(2)}% ${(v*100).toFixed(2)}%`).join(",")+")";
+  const keep=c>=1?[[0,0],[1,0],[1,c-1],[c-1,1],[0,1]]:c>0?[[0,0],[c,0],[0,c]]:[[0,0],[0,0],[0,0]];
+  const flap=c>=1?[[1,c-1],[c-1,c-1],[c-1,1]]:c>0?[[c,0],[c,c-1],[c-1,c-1],[c-1,c],[0,c]]:[[0,0],[0,0],[0,0]];
+  return {keep:P(keep),flap:P(flap)};
+}
 function goBook(i){
   if(i<0||i>=BOOKS.length||i===bookIdx||bookBusy)return;
-  const dir=i>bookIdx?1:-1,cover=$("#bookCover");
+  const cover=$("#bookCover");
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){bookIdx=i;fillBook();return}
-  bookBusy=true;cover.classList.add(dir>0?"turn-out-next":"turn-out-prev");
-  setTimeout(()=>{bookIdx=i;fillBook();cover.classList.remove("turn-out-next","turn-out-prev");cover.classList.add(dir>0?"turn-in-next":"turn-in-prev");
-    setTimeout(()=>{cover.classList.remove("turn-in-next","turn-in-prev");bookBusy=false},330)},300);
+  bookBusy=true;
+  const dir=i>bookIdx?1:-1,oldHTML=cover.innerHTML,oldEmpty=cover.classList.contains("empty");
+  const cr=cover.getBoundingClientRect(),sr=cover.parentElement.getBoundingClientRect();const box={top:cr.top-sr.top,left:cr.left-sr.left,w:cr.width,h:cr.height};
+  bookIdx=i;fillBook();
+  const newHTML=cover.innerHTML,newEmpty=cover.classList.contains("empty");
+  const sheet=document.createElement("div"),flap=document.createElement("div");
+  sheet.className="book curl-sheet";flap.className="curl-flap";
+  [sheet,flap].forEach(el=>Object.assign(el.style,{top:box.top+"px",left:box.left+"px",width:box.w+"px",height:box.h+"px"}));
+  if(dir>0){sheet.innerHTML=oldHTML;sheet.classList.toggle("empty",oldEmpty)}
+  else{sheet.innerHTML=newHTML;sheet.classList.toggle("empty",newEmpty);cover.innerHTML=oldHTML;cover.classList.toggle("empty",oldEmpty)}
+  cover.parentElement.append(sheet,flap);
+  const dur=720,t0=performance.now(),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+  function frame(now){
+    const t=Math.min(1,(now-t0)/dur),e=ease(t),c=dir>0?2-2*e:2*e;
+    const p=curlPoly(c);sheet.style.clipPath=p.keep;flap.style.clipPath=p.flap;
+    flap.style.background=`linear-gradient(to bottom right,var(--flap-1) ${Math.max(0,(c-1)*50)}%,var(--flap-2) ${(c*50).toFixed(1)}%)`;
+    if(t<1){requestAnimationFrame(frame);return}
+    sheet.remove();flap.remove();
+    if(dir<0){cover.innerHTML=newHTML;cover.classList.toggle("empty",newEmpty)}
+    bookBusy=false;
+  }
+  requestAnimationFrame(frame);
 }
 $("#bkPrev").addEventListener("click",()=>goBook(bookIdx-1));
 $("#bkNext").addEventListener("click",()=>goBook(bookIdx+1));
