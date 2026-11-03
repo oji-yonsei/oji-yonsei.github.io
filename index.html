@@ -192,7 +192,7 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .trail-wrap{position:relative}
 .trail-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:20px}
 .trail-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
-.trail{position:relative;list-style:none;margin:0;padding:170px 0 60px;
+.trail{position:relative;list-style:none;margin:0;padding:210px 0 60px;
   background:radial-gradient(circle at 20% 30%,color-mix(in srgb,var(--khaki-soft) 70%,transparent),transparent 40%),
              radial-gradient(circle at 80% 75%,color-mix(in srgb,var(--khaki-soft) 60%,transparent),transparent 45%);
   border-radius:14px}
@@ -206,8 +206,8 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .stop.current .dot{transform:scale(1.35)}
 .stop:nth-child(odd){--x:44%}
 .stop:nth-child(even){--x:56%}
-.card{grid-column:1;margin:0 18% 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:border-color .3s,box-shadow .3s;min-width:0;text-align:left;font:inherit;color:inherit}
-.stop:nth-child(even) .card{grid-column:2;margin:0 0 0 18%}
+.card{position:relative;z-index:2;grid-column:1;margin:0 22% 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;cursor:pointer;transition:border-color .3s,box-shadow .3s;min-width:0;text-align:left;font:inherit;color:inherit}
+.stop:nth-child(even) .card{grid-column:2;margin:0 0 0 22%}
 .stop.current .card{border-color:var(--scarf);box-shadow:0 6px 20px -10px color-mix(in srgb,var(--scarf) 60%,transparent)}
 .card .when{font-size:12.5px;color:var(--scarf);font-weight:500}
 .card h3{font-family:var(--f-body);font-size:16px;font-weight:600;margin:4px 0 4px;line-height:1.45}
@@ -229,7 +229,7 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 :root:not([data-theme="light"]) .k-club{background:#a9cdb3;color:#14231a}}
 .stop.future .card{border-style:dashed;background:transparent}
 .stop.future .dot{border-style:dashed}
-.walker{position:absolute;left:0;top:0;width:66px;z-index:3;pointer-events:none;will-change:transform}
+.walker{position:absolute;left:0;top:0;width:88px;z-index:3;pointer-events:none;will-change:transform}
 .walker .inner{transform-origin:50% 100%}
 .walker img{display:block;width:100%;height:auto;transition:transform .25s}
 .walker.flip img{transform:scaleX(-1)}
@@ -241,7 +241,8 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
   .stop{grid-template-columns:1fr;min-height:0;padding:12px 0}
   .stop:nth-child(odd){--x:34px}.stop:nth-child(even){--x:62px}
   .card,.stop:nth-child(even) .card{grid-column:1;margin:0 0 0 96px}
-  .walker{width:46px}
+  .walker{width:62px}
+  .trail{padding-top:150px}
 }
 
 /* semesters + archive */
@@ -840,7 +841,7 @@ function build(){
   if(!box.height)return;
   const pts=stops.map(st=>{const r=st.querySelector(".dot").getBoundingClientRect();return[r.left+r.width/2-box.left,r.top+r.height/2-box.top]});
   dotsY=pts.map(p=>p[1]);
-  const sx=box.width-(box.width<700?28:48),sy=Math.max(20,Math.min(130,pts[0][1]-60));startY=sy;
+  const mob=box.width<700;const sx=mob?60:Math.min(pts[0][0]+190,box.width-60),sy=Math.max(20,pts[0][1]-(mob?70:95));startY=sy;
   let d=`M${sx},${sy} C${sx},${(sy+pts[0][1])/2} ${pts[0][0]},${(sy+pts[0][1])/2} ${pts[0][0]},${pts[0][1]}`;
   for(let i=1;i<pts.length;i++){const[a,b]=pts[i-1],[c,e]=pts[i],m=(e-b)/2;d+=` C${a},${b+m} ${c},${e-m} ${c},${e}`}
   d+=` L${pts.at(-1)[0]},${box.height-8}`;
