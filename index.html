@@ -192,7 +192,7 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .trail-wrap{position:relative}
 .trail-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:20px}
 .trail-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
-.trail{position:relative;list-style:none;margin:0;padding:40px 0 60px;
+.trail{position:relative;list-style:none;margin:0;padding:170px 0 60px;
   background:radial-gradient(circle at 20% 30%,color-mix(in srgb,var(--khaki-soft) 70%,transparent),transparent 40%),
              radial-gradient(circle at 80% 75%,color-mix(in srgb,var(--khaki-soft) 60%,transparent),transparent 45%);
   border-radius:14px}
@@ -770,13 +770,14 @@ $("#semArchive").addEventListener("click",()=>{window.setArchiveSem&&window.setA
 let stops=[];
 const svg=document.querySelector(".trail-wrap svg"),road=svg.querySelector(".road"),dash=svg.querySelector(".dash"),walked=svg.querySelector(".walked");
 const walker=$("#walker");
-let total=0,dotsY=[],cur=0,target=0,lastX=null;
+let startY=8,total=0,dotsY=[],cur=0,target=0,lastX=null;
 function build(){
   const box=list.getBoundingClientRect();
   if(!box.height)return;
   const pts=stops.map(st=>{const r=st.querySelector(".dot").getBoundingClientRect();return[r.left+r.width/2-box.left,r.top+r.height/2-box.top]});
   dotsY=pts.map(p=>p[1]);
-  let d=`M${pts[0][0]},8 L${pts[0][0]},${pts[0][1]}`;
+  const sx=box.width-(box.width<700?28:48),sy=Math.max(20,Math.min(130,pts[0][1]-60));startY=sy;
+  let d=`M${sx},${sy} C${sx},${(sy+pts[0][1])/2} ${pts[0][0]},${(sy+pts[0][1])/2} ${pts[0][0]},${pts[0][1]}`;
   for(let i=1;i<pts.length;i++){const[a,b]=pts[i-1],[c,e]=pts[i],m=(e-b)/2;d+=` C${a},${b+m} ${c},${e-m} ${c},${e}`}
   d+=` L${pts.at(-1)[0]},${box.height-8}`;
   [road,dash,walked].forEach(p=>p.setAttribute("d",d));
@@ -788,7 +789,7 @@ function lenForY(y){let lo=0,hi=total;for(let k=0;k<22;k++){const mid=(lo+hi)/2;
 function update(snap){
   const box=list.getBoundingClientRect();
   if(!total)return;
-  const y=Math.max(8,Math.min(box.height-8,innerHeight*0.55-box.top));
+  const y=Math.max(startY,Math.min(box.height-8,innerHeight*0.55-box.top));
   target=lenForY(y);
   if(snap)cur=target;
 }
