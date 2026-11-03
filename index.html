@@ -477,6 +477,24 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .cal-form .chk input{width:16px;height:16px;accent-color:var(--scarf)}
 .cal-form .btn.primary{background:var(--accent);color:var(--surface)}
 .cal-form .btn.ghost{border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.book-stage{perspective:1400px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.book{transform-origin:left center;transition:transform .3s ease,opacity .3s ease;backface-visibility:hidden}
+.book.turn-out-next{transform:rotateY(-80deg);opacity:.2}
+.book.turn-out-prev{transform:rotateY(80deg);opacity:.2;transform-origin:right center}
+.book.turn-in-next{animation:bookInNext .33s ease}
+.book.turn-in-prev{animation:bookInPrev .33s ease}
+@keyframes bookInNext{from{transform:rotateY(70deg);opacity:.2}to{transform:none;opacity:1}}
+@keyframes bookInPrev{from{transform:rotateY(-70deg);opacity:.2}to{transform:none;opacity:1}}
+.book.empty{background:repeating-linear-gradient(135deg,var(--band),var(--band) 14px,color-mix(in srgb,var(--band) 88%,#fff) 14px,color-mix(in srgb,var(--band) 88%,#fff) 28px)}
+.book.empty h3{opacity:.9}
+.book-nav{display:flex;align-items:center;justify-content:center;gap:14px}
+.book-nav button{font:inherit;font-size:20px;line-height:1;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.book-nav button:disabled{opacity:.35;cursor:default}
+.book-nav span{font-size:13px;color:var(--muted)}
+.book-dots{display:flex;justify-content:center;gap:6px}
+.book-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+.book-dots button[aria-current="true"]{background:var(--accent);width:20px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){.book{transition:none}}
 /* members */
 .members{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .member{perspective:900px;height:200px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
@@ -710,16 +728,15 @@ footer strong{color:var(--ink);font-size:16px}
   <div class="block" id="act-book">
     <div class="b-head"><div class="eyebrow">Reading</div><h3>함께 읽는 책</h3><p class="b-sub">매주 목차를 나눠 읽고, 영상·기사 담당이 자료를 붙이고, 포트폴리오 담당이 그 주의 기록을 정리합니다.</p></div>
   <div class="reading">
-    <div class="book">
-      <div class="eyebrow">첫 번째 책</div>
-      <h3>왜 세계의 절반은 굶주리는가?</h3>
-      <div class="by">장 지글러 · 유영미 옮김 · 갈라파고스</div>
-      <p>유엔 식량특별조사관을 지낸 저자가 아들의 질문에 답하는 형식으로 기아의 구조를 설명합니다. 봉사를 다녀오면 불편해지는 책이고, 그 불편함을 그대로 적는 것이 이번 독서의 과제입니다.</p>
+    <div class="book-stage">
+      <div class="book" id="bookCover" aria-live="polite"></div>
+      <div class="book-nav"><button type="button" id="bkPrev" aria-label="이전 책">‹</button><span id="bkCount" class="mono"></span><button type="button" id="bkNext" aria-label="다음 책">›</button></div>
+      <div class="book-dots" id="bkDots"></div>
     </div>
     <div style="min-width:0">
       <div class="tabs" role="tablist" id="tabs"></div>
       <div class="panel" id="panel" role="tabpanel"></div>
-      <p class="caution">읽는 방식: 받아적는 대신, 한 번씩은 “이 설명이 틀렸다면 무엇이 근거일까”를 적습니다. 2000년대 중반 통계라 지금 숫자와 다를 수 있고, “시장이 기아를 만든다”는 설명에는 반론도 있습니다.</p>
+      <p class="caution" id="bkNote"></p>
     </div>
   </div>
   </div>
@@ -1225,15 +1242,48 @@ window.ojiCal=(function(){
     finally{$("#upBtn").disabled=false}
   });
 })();
-/* reading tabs */
+/* reading: 책장 (책을 추가하려면 BOOKS에 항목을 채우세요) */
+const BOOKS=[
+ {n:"첫 번째 책",title:"왜 세계의 절반은 굶주리는가?",by:"장 지글러 · 유영미 옮김 · 갈라파고스",desc:"유엔 식량특별조사관을 지낸 저자가 아들의 질문에 답하는 형식으로 기아의 구조를 설명합니다. 봉사를 다녀오면 불편해지는 책이고, 그 불편함을 그대로 적는 것이 이번 독서의 과제입니다.",weeks:BOOK,start:3,note:"읽는 방식: 받아적는 대신, 한 번씩은 “이 설명이 틀렸다면 무엇이 근거일까”를 적습니다. 2000년대 중반 통계라 지금 숫자와 다를 수 있고, “시장이 기아를 만든다”는 설명에는 반론도 있습니다."},
+ {n:"두 번째 책",title:"",by:"",desc:"",weeks:[],note:""},
+ {n:"세 번째 책",title:"",by:"",desc:"",weeks:[],note:""},
+ {n:"네 번째 책",title:"",by:"",desc:"",weeks:[],note:""}
+];
+let bookIdx=0,bookBusy=false;
 function showWeek(i){
+  const weeks=BOOKS[bookIdx].weeks;
   document.querySelectorAll("#tabs button").forEach((b,j)=>b.setAttribute("aria-selected",i===j));
-  const w=BOOK[i];
-  $("#panel").innerHTML=`<ol>${w.c.map((c,j)=>`<li><span>${j+1}. ${esc(c)}</span>${w.d?`<span class="who">${esc(w.d[j])}</span>`:""}</li>`).join("")}</ol>${w.r.length?`<div class="roles">${w.r.map(r=>`<span class="chip">${esc(r)}</span>`).join("")}</div>`:""}`;
+  const w=weeks[i];if(!w)return;
+  $("#panel").innerHTML=`<ol>${w.c.map((c,j)=>`<li><span>${j+1}. ${esc(c)}</span>${w.d?`<span class="who">${esc(w.d[j])}</span>`:""}</li>`).join("")}</ol>${w.r&&w.r.length?`<div class="roles">${w.r.map(r=>`<span class="chip">${esc(r)}</span>`).join("")}</div>`:""}`;
 }
-$("#tabs").innerHTML=BOOK.map((w,i)=>`<button type="button" role="tab" id="tab${i}">${esc(w.l)}</button>`).join("");
-document.querySelectorAll("#tabs button").forEach((b,i)=>b.addEventListener("click",()=>showWeek(i)));
-showWeek(3);
+function fillBook(){
+  const b=BOOKS[bookIdx],empty=!b.title;
+  const cover=$("#bookCover");cover.classList.toggle("empty",empty);
+  cover.innerHTML=empty?`<div class="eyebrow">${esc(b.n)}</div><h3>다음 책을 고르고 있어요</h3><div class="by">함께 읽을 책이 정해지면 이 페이지에 채워집니다.</div><p>읽고 싶은 책이 있다면 정기 모임에서 추천해 주세요.</p>`:`<div class="eyebrow">${esc(b.n)}</div><h3>${esc(b.title)}</h3><div class="by">${esc(b.by)}</div><p>${esc(b.desc)}</p>`;
+  $("#bkCount").textContent=`${bookIdx+1} / ${BOOKS.length}`;
+  $("#bkPrev").disabled=bookIdx===0;$("#bkNext").disabled=bookIdx===BOOKS.length-1;
+  $("#bkDots").innerHTML=BOOKS.map((x,i)=>`<button type="button" aria-label="${esc(x.n)}"${i===bookIdx?' aria-current="true"':""} data-i="${i}"></button>`).join("");
+  const weeks=b.weeks||[];
+  $("#tabs").innerHTML=weeks.map((w,i)=>`<button type="button" role="tab" id="tab${i}">${esc(w.l)}</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach((t,i)=>t.addEventListener("click",()=>showWeek(i)));
+  if(weeks.length)showWeek(Math.min(b.start||0,weeks.length-1));
+  else $("#panel").innerHTML=`<p class="arch-empty" style="padding:28px 10px">주차별 읽기 계획이 아직 없어요.</p>`;
+  $("#bkNote").textContent=b.note||"";$("#bkNote").hidden=!b.note;
+}
+function goBook(i){
+  if(i<0||i>=BOOKS.length||i===bookIdx||bookBusy)return;
+  const dir=i>bookIdx?1:-1,cover=$("#bookCover");
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){bookIdx=i;fillBook();return}
+  bookBusy=true;cover.classList.add(dir>0?"turn-out-next":"turn-out-prev");
+  setTimeout(()=>{bookIdx=i;fillBook();cover.classList.remove("turn-out-next","turn-out-prev");cover.classList.add(dir>0?"turn-in-next":"turn-in-prev");
+    setTimeout(()=>{cover.classList.remove("turn-in-next","turn-in-prev");bookBusy=false},330)},300);
+}
+$("#bkPrev").addEventListener("click",()=>goBook(bookIdx-1));
+$("#bkNext").addEventListener("click",()=>goBook(bookIdx+1));
+$("#bkDots").addEventListener("click",e=>{const d=e.target.closest("button");if(d)goBook(+d.dataset.i)});
+(function(){let x0=null;const c=$("#bookCover");c.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});c.addEventListener("touchend",e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)goBook(bookIdx+(dx<0?1:-1));x0=null})})();
+fillBook();
+
 
 </script>
 
