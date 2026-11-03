@@ -514,6 +514,19 @@ div.card{display:block}
 .book-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
 .book-dots button[aria-current="true"]{background:var(--accent);width:20px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){.book{transition:none}}
+.why{margin-top:40px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.why-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.why-card .n{font-size:12px;color:var(--scarf);font-weight:600}
+.why-card strong{display:block;font-size:17px;line-height:1.45;margin:6px 0 8px}
+.why-card p{margin:0;font-size:14px;color:var(--muted)}
+.roles3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:14px;border-top:2px solid var(--accent);background:var(--surface);border-radius:0 0 12px 12px;border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.roles3>div{padding:16px 20px;border-right:1px solid var(--line)}
+.roles3>div:last-child{border-right:0}
+.roles3 strong{font-size:15px;color:var(--accent)}
+.roles3 p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.closing{margin:22px 0 0;padding:18px 22px;background:var(--hero-bg);color:var(--hero-title);border-radius:12px;font-size:15.5px;font-weight:500;line-height:1.75}
+@media (max-width:860px){.why-grid,.roles3{grid-template-columns:1fr}.roles3>div{border-right:0;border-bottom:1px solid var(--line)}.roles3>div:last-child{border-bottom:0}}
 /* members */
 .members{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .member{perspective:900px;height:200px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
@@ -676,11 +689,26 @@ footer strong{color:var(--ink);font-size:16px}
         <p class="note">개발협력에 관심을 둔 학우는 많았지만, 그 관심을 하나로 묶어 줄 접점이나 커뮤니티가 없어 각자의 활동에 그치곤 했습니다. 오지 탐험대는 흩어진 관심사를 잇는 구심점이 되어, 학우들이 자유롭게 소통하고 영감을 주고받는 지속 가능한 네트워크를 만들기 위해 시작했습니다.</p>
       </div>
       <table class="spec">
-        <tr><th>소속</th><td>연세대학교 빈곤문제국제개발연구원(IPAID) 산하 학술모임</td></tr>
+        <tr><th>소속</th><td>연세대학교 미래캠퍼스 빈곤문제국제개발연구원(IPAID) 산하 학술모임</td></tr>
+        <tr><th>모임 장소</th><td>미래캠퍼스 컨버전스홀 프로젝트실 (대관 상황에 따라 바뀔 수 있어요)</td></tr>
         <tr><th>지도교수</th><td>김장생 교수님, 오지은 교수님</td></tr>
         <tr><th>정기 모임</th><td>매주 화요일 오후, 약 1시간 내외</td></tr>
         <tr><th>참여 대상</th><td>개발협력과 해외봉사에 관심 있는 학우 누구나, 학과 제한 없음</td></tr>
       </table>
+    </div>
+    <div class="why">
+      <div class="b-head"><div class="eyebrow">Why</div><h3>우리가 모인 이유</h3></div>
+      <div class="why-grid">
+        <div class="why-card"><span class="n mono">개인</span><strong>깊이 있게 배우고, 먼저 다녀온 사람과 연결됩니다</strong><p>정규 수업만으로는 채우기 어려운 개발협력 공부를 사례와 경험 중심으로 이어 갑니다. 해외봉사 경험자와 연결되어, 혼자서는 모으기 어려운 현장 정보와 준비 과정을 함께 나눕니다.</p></div>
+        <div class="why-card"><span class="n mono">공동체</span><strong>학과를 넘어 함께 토론하는 학술 공동체</strong><p>친목을 넘어 학문적 관심으로 모인 공동체를 지향합니다. 수업 밖에서도 자유롭게 토의하고, 구성원이 직접 활동을 기획하고 운영하며 평가합니다.</p></div>
+        <div class="why-card"><span class="n mono">학교</span><strong>IPAID와 함께 키우는 국제개발협력 인재</strong><p>빈곤문제국제개발연구원(IPAID)을 중심으로 이어져 온 인재 양성의 흐름을 학생 주도 커뮤니티로 넓혀, 이론과 실무 감각을 함께 갖춘 개발협력 인재로 성장합니다.</p></div>
+      </div>
+      <div class="roles3">
+        <div><strong>진로 탐색</strong><p>국제개발협력 분야의 다양한 직무와 진출 경로를 함께 알아보고 정보를 나눕니다.</p></div>
+        <div><strong>네트워킹</strong><p>여러 학과 학생과 현장 경험자가 교류하며 오래가는 인적 네트워크를 만듭니다.</p></div>
+        <div><strong>학술 역량</strong><p>자기주도 학습, 주제 발표, 토의·토론으로 수업 밖의 전문 지식을 쌓습니다.</p></div>
+      </div>
+      <p class="closing">작은 움직임이 모여 의미 있는 변화를 만든다는 믿음에서 출발했습니다. 정보와 기회의 격차 없이 누구나 도전하고, 혼자가 아닌 함께 성장하는 곳을 만들어 갑니다.</p>
     </div>
   </div>
 
@@ -856,16 +884,7 @@ footer strong{color:var(--ink);font-size:16px}
 <script>
 const SEMS=[
  {id:"2026-2",label:"2026년 2학기",sum:"매주 화요일, 발제와 시사 분석, 포트폴리오 컨설팅으로 한 걸음씩 나아간 학기입니다.",stops:[{"when": "9월 8일", "who": ["시작"], "title": "나의 경험, 포트폴리오로 정리하기", "desc": "개별 포트폴리오 작성을 위한 초안 작성. 각자의 경험과 활동을 돌아보며 포트폴리오의 기초를 마련합니다.", "tags": [], "k": "club", "kl": "시작"}, {"when": "9월 15일", "who": ["김호정", "이보늬"], "title": "국제개발협력의 새로운 재원과 기후위기", "lines": [["김호정", "국제개발협력에서 민간재원이 주목받는 이유와 ODA의 역할을 살펴봅니다.", "https://youtu.be/ilN-T4cW9Hg", "영상"], ["이보늬", "유럽의 기록적인 가뭄이 원전 가동과 농업, 경제에 미치는 영향을 살펴봅니다.", "https://www.ytn.co.kr/_ln/0104_202608130623133176", "기사"]], "tags": ["영상", "시사"], "k": "dispatch", "kl": "발제"}, {"when": "9월 22일", "who": ["조민서", "황서영", "이나영"], "title": "국경과 사회문제, 서로 다른 시선으로 읽기", "lines": [["조민서", "인도네시아의 담배 산업과 청소년 흡연 등 사회문제를 살펴봅니다.", "https://www.youtube.com/watch?v=ignRvQAnt6I", "영상"], ["황서영", "스페인 세우타와 모로코의 국경 갈등, 이주 문제를 다룬 경찰 보고서를 분석합니다.", "https://www.democrata.es/en/society/read-here-the-complete-police-report-from-ceuta-55-pages-on-the-moroccan-active-guidance-and-the-plan-to-collapse-the-border/", "보고서"], ["이나영", "구성원들과 포트폴리오를 함께 읽으며 경험과 활동을 정리합니다."]], "tags": ["영상", "시사", "컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "9월 29일", "who": ["정승민", "전진우", "황서영"], "title": "아프리카 개발협력과 국제사회 현안", "lines": [["정승민", "선정한 국제사회 관련 영상을 바탕으로 주요 현안을 살펴봅니다.", "https://www.youtube.com/watch?v=jufCCdJGz-4", "영상"], ["전진우", "EDCF와 AI 기술을 결합한 한국의 아프리카 시장 진출 및 개발협력 전략을 살펴봅니다.", "https://www.youthassembly.kr/news/1001658", "기사"], ["황서영", "구성원들과 포트폴리오를 함께 읽고 의견을 나눕니다."]], "tags": ["영상", "시사", "컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "10월 6일", "who": ["이나영", "김호정"], "title": "아이티의 위기와 포트폴리오 점검", "lines": [["이나영", "갱단 폭력으로 인한 아이티의 치안 위기와 대규모 국내 실향민 문제를 살펴봅니다.", "https://youtu.be/lDnB3C3-n74", "영상"], ["김호정", "구성원들과 포트폴리오를 함께 읽으며 작성 내용을 점검합니다."]], "tags": ["영상", "컨설팅"], "k": "dispatch", "kl": "발제"}, {"when": "10월 13일 · 10월 20일", "who": [], "title": "중간고사 기간", "desc": "학업에 집중하며 잠시 학술모임 활동을 쉬어갑니다.", "tags": [], "k": "edu", "kl": "쉼표"}, {"when": "10월 27일", "who": [], "title": "함께하는 탐험대의 하루", "desc": "구성원들이 함께 식사하며 교류하고 친목을 다지는 시간을 갖습니다.", "tags": [], "k": "share", "kl": "친목"}, {"when": "11월 3일", "who": [], "title": "나만의 시선으로 완성하는 과제", "desc": "개별 과제를 수행하며 그동안 쌓아온 학습 내용을 정리하고 자신만의 결과물로 발전시킵니다.", "tags": [], "k": "edu", "kl": "과제"}, {"when": "학기 말", "who": [], "title": "2학기 활동 보고서", "desc": "한 학기 활동을 정리해 자료실에 올립니다", "tags": [], "k": "club", "kl": "예정", "future": true}]},
- {id:"2026-1",label:"2026년 1학기",sum:"첫 대원을 모집하고 캐릭터 지금이와 함께 출발한 학기입니다.",stops:[
-  {when:"3.17 – 3.25",title:"신입부원 모집",desc:"홍보 포스터와 구글 폼으로 첫 대원 모집",k:"club",kl:"모집"},
-  {when:"3.26",title:"캐릭터 ‘지금이’ 공개",desc:"인스타그램 @oji_yonsei에 캐릭터 소개 게시",k:"share",kl:"홍보"},
-  {when:"4.1",title:"1학기 정기 모임 시작",desc:"매주 모여 개발협력 이야기를 나누기 시작",k:"club",kl:"출발"},
-  {when:"4월",title:"해외봉사 사례 경험 공유",desc:"대원들의 현장 경험을 나누는 시간",k:"share",kl:"공유"},
-  {when:"5월",title:"개발협력 사업 사례 분석과 토의",desc:"실제 사업 사례를 읽고 함께 토론",k:"edu",kl:"토의"},
-  {when:"5월 – 6월",title:"적정기술과 현지 맞춤형 솔루션 토의",desc:"현장에 맞는 해법을 주제로 토의",k:"edu",kl:"토의"},
-  {when:"5월 – 6월",title:"뉴스 속 개발협력 이야기",desc:"그 주의 개발협력 뉴스를 함께 읽기",k:"edu",kl:"뉴스"},
-  {when:"6.22",title:"1학기 활동 마무리",desc:"활동 보고서는 자료실에서 볼 수 있어요",k:"club",kl:"마무리"}
- ]}
+ {id:"2026-1",label:"2026년 1학기",sum:"‘개발협력과 해외봉사에 대한 관심 확대’를 대주제로 첫발을 뗀 학기입니다.",stops:[{"when": "3.17 – 3.25", "who": [], "title": "첫 대원 모집", "desc": "포스터 부착, 지인 추천, 국제개발학의기초 수업 홍보로 첫 대원을 모았습니다.", "tags": [], "k": "club", "kl": "모집"}, {"when": "3.26", "who": [], "title": "캐릭터 ‘지금이’ 공개", "desc": "인스타그램 @oji_yonsei에 오지 탐험대의 캐릭터를 소개했습니다.", "tags": [], "k": "share", "kl": "홍보"}, {"when": "4월 1일", "who": ["1주차"], "title": "OT · 내가 생각하는 개발협력이란?", "desc": "활동 내용을 소개하고 서로를 알아가며, 개발협력의 정의를 함께 토의했습니다.", "tags": ["토의"], "k": "club", "kl": "OT"}, {"when": "4월 8일", "who": ["2주차"], "title": "뉴스 속 개발협력", "desc": "최근 국제 이슈를 하나씩 골라, 그 이슈가 우리 삶과 어떻게 연결되는지 이야기했습니다.", "tags": ["시사"], "k": "dispatch", "kl": "발제"}, {"when": "4월 29일", "who": ["3주차"], "title": "해외봉사 경험 공유", "desc": "각자의 해외봉사 경험을 나누고, 해외봉사를 준비하는 대원을 위한 멘토링과 희망 인원 모집을 진행했습니다.", "tags": ["해외봉사", "멘토링"], "k": "share", "kl": "공유"}, {"when": "5월 6일", "who": ["4주차"], "title": "독서 감상 및 토의", "desc": "개발협력을 주제로 한 책을 읽고 감상을 나누며, 한 학기 동안의 정기 활동을 함께 논의했습니다.", "tags": ["독서"], "k": "edu", "kl": "독서"}, {"when": "5월", "who": ["5주차"], "title": "실패에서 배우는 ODA", "desc": "실패한 개발협력 사업 사례를 발표하고, 무엇이 문제였는지 함께 분석하고 토의했습니다.", "tags": ["사례 분석"], "k": "dispatch", "kl": "발제"}, {"when": "5월 20일", "who": ["6주차"], "title": "영상으로 보는 개발협력", "desc": "개발협력 관련 영상 미디어를 함께 보고, 영화 속에 담긴 개발협력의 장면을 토의했습니다.", "tags": ["영상"], "k": "edu", "kl": "영상"}, {"when": "5월 27일", "who": ["7주차"], "title": "학술 교류회", "desc": "한 학기 활동을 마무리하며 자유 주제로 발표하고 경험을 나눴습니다. 교류회 결과 보고서로 활동을 정리했습니다.", "tags": ["교류회"], "k": "club", "kl": "마무리"}]}
 ];
 const MEMBERS=[
  ["서영","KOICA 청년중기봉사단 거버넌스 분야","캄보디아·키르기스스탄 봉사, 청소년 멘토링"],
