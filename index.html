@@ -247,7 +247,7 @@ table.spec th{width:120px;font-weight:600;color:var(--accent);background:color-m
 .card .lines a.src{display:inline-block;margin-left:4px;font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;padding:1px 8px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:99px;white-space:nowrap}
 .card .lines a.src:hover{background:var(--accent);color:var(--surface)}
 div.card{display:block}
-.chip{font-size:11.5px;line-height:1.5;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--ink);background:var(--paper)}
+.chip{font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--ink);background:var(--paper)}
 .chip.k{border-color:transparent;font-weight:600}
 .k-dispatch{background:#dbe8d6;color:#24402c}
 .k-edu{background:#efe4cd;color:#4b3a1c}
@@ -386,8 +386,7 @@ div.card{display:block}
 @media (max-width:900px){.wwd{grid-template-columns:1fr 1fr}.news-grid{grid-template-columns:1fr}}
 /* about / activities blocks */
 .subnav{display:flex;gap:6px;flex-wrap:wrap;margin:-12px 0 40px}
-.subnav button,.kinds button{font:inherit;font-size:13.5px;line-height:1.2;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .2s,border-color .2s,color .2s}
-.subnav button:hover,.kinds button:hover{border-color:var(--accent)}
+.subnav button,.kinds button{font:inherit;font-size:13.5px;padding:7px 13px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .subnav button:hover{border-color:var(--accent)}
 .block{padding-block:20px 56px;scroll-margin-top:90px}
 .block+.block{border-top:1px dashed var(--line);padding-top:48px}
@@ -416,7 +415,7 @@ div.card{display:block}
 .act4 ul{margin:0;padding-left:18px;font-size:14px}
 .act4 li{margin:3px 0}
 .kinds{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.kinds button[aria-pressed="true"]{background:var(--khaki-soft);border-color:transparent;color:var(--ink);font-weight:600}
+.kinds button[aria-pressed="true"]{border-color:var(--scarf);color:var(--scarf)}
 .arow .thumb{width:54px;height:54px;object-fit:cover;border-radius:8px;background:var(--khaki-soft)}
 .arow .kind.card{background:#f4ddd5;color:#6a2a1d}
 .collab{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 34px}
