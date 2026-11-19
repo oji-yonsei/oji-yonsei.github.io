@@ -12,7 +12,7 @@
  *   사이트에서 운영진 코드로 추가·수정·삭제할 수 있고, 구글 캘린더에서 직접 넣은 일정도 사이트에 보입니다.
  *   프로젝트 설정의 시간대를 "(GMT+09:00) 서울"로 맞춰 두세요.
  */
-const ROOT_ID = "1GbHabez0EURsNq7VChHDylZ7f4aSlj33"; // 오지 탐험대 자료실 폴더
+const ROOT_ID = "1Id4J0OSO7yziGjS1q4PAePiQjamR-GbC"; // 오지 탐험대 자료실 폴더 (hj.KIM05@yonsei.ac.kr)
 const KINDS = ["활동 보고서", "활동 사진", "카드뉴스", "발제 자료", "기타"];
 const EXTS = ["pdf","jpg","jpeg","png","gif","webp","heic","hwp","hwpx","doc","docx","ppt","pptx","xls","xlsx","mp4","mov","txt","csv"];
 const MAX_BYTES = 10 * 1024 * 1024; // 10MB
